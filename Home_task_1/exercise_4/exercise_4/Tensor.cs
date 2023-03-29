@@ -1,13 +1,12 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace exercise_4
 {
     internal class Tensor
     {
         private int[] _indexes;
-        private int[] _tensor;
-        private int[] _multipliers;
+        private int[] _tensor = null;
+        private int[] _multipliers = null;
 
         public Tensor(int dimension)
         {
@@ -28,10 +27,10 @@ namespace exercise_4
             {
                 throw new ArgumentNullException(nameof(indexes));
             }
-            int length = indexes.Length;
             this._indexes = indexes;
-            this._tensor = new int[length];
             this._multipliers = GetMultipliers();
+            int length = GetIndexTensor(indexes);
+            this._tensor = new int[length];
         }
 
         public void SetValue(int value, params int[] index)

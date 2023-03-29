@@ -1,7 +1,7 @@
 ﻿namespace exercise_1
 {
     internal class Program
-    {
+    {//Вітаю. Перше завдання по створенню репозиторію Ви виконали.
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");

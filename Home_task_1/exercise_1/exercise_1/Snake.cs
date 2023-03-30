@@ -2,7 +2,7 @@
 using System.Text;
 
 namespace exercise_1
-{
+{// Молодець.
     internal class Snake
     {
         private int _row;
@@ -28,7 +28,7 @@ namespace exercise_1
         {
             get { return _column; }
             set
-            {
+            {// Метод валідування часто найкраще виносити в інший клас. 
                 if (Validator(value))
                 {
                     _column = value;

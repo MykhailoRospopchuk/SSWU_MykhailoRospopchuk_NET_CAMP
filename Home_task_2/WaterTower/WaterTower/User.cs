@@ -1,6 +1,6 @@
 ﻿namespace WaterTower
 {
-    internal class User
+    internal abstract class User
     {
         private readonly int _consumption;
 
@@ -9,9 +9,11 @@
             _consumption = consumption;
         }
 
-        public int GetConsumption()
-        { 
-            return _consumption; 
+        //Отримуємо на запит значення споживання користувача
+        public abstract int GetConsumption();
+        public override string ToString()
+        {
+            return String.Format("User consumption: {0}", _consumption);
         }
     }
 }

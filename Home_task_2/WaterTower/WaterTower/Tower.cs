@@ -1,6 +1,6 @@
 ﻿namespace WaterTower
 {
-    internal class Tower
+    internal abstract class Tower
     {
         private readonly int _max_level;
         private readonly int _min_level = 0;
@@ -12,38 +12,24 @@
             _current_level = current_level;
         }
 
-        public void WaterIncrease(int increase)
-        {
-            _current_level += increase;
-        }
+        //Збільшує рівень води в вежі на  велечину increase
+        public abstract void WaterIncrease(int increase);
 
-        public void WaterDecrease(int decrease)
-        {
-            _current_level -= decrease;
-        }
+        //Зменшуємо рівень води в вежі на  велечину increase
+        public abstract void WaterDecrease(int decrease);
 
-        public int GetCurrentLevel() 
-        { 
-            return _current_level;
-        }
-        public bool IsUnderMaxLevel(int pump_power)
-        {
-            int expected_level = _current_level + pump_power;
-            if (expected_level <= _max_level)
-            {
-                return true;
-            }
-            else return false;
-        }
+        //Повертає на запит поточний ірвень води в вежі
+        public abstract int GetCurrentLevel();
 
-        public bool IsOwerMinLevel(int user_consumption)
+        //Перевіряє чи поточний рівень води + об'єм води закачики не буде перевищувати максимальний рівень води
+        public abstract bool IsUnderMaxLevel(int pump_power);
+
+        //Перевіряє чи поточний рівень води - об'єм води споживання не буде меншим за мінімальний рівень води
+        public abstract bool IsOwerMinLevel(int user_consumption);
+
+        public override string ToString()
         {
-            int expected_level = _current_level - user_consumption;
-            if (expected_level < _min_level)
-            {
-                return true;
-            }
-            else return false;
+            return String.Format("Max level of water: {0}. Min level of water: {1}. Current level of water: {2}", _max_level, _min_level, _current_level);
         }
     }
 }

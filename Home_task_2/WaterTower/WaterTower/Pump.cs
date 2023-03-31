@@ -1,6 +1,8 @@
-﻿namespace WaterTower
+﻿using System.Text;
+
+namespace WaterTower
 {
-    internal class Pump
+    internal abstract class Pump
     {
         private bool _turn = false;
         private readonly int _power;
@@ -15,25 +17,21 @@
             get { return _power; }
         }
 
-        public int GetWhater()
+        //Закачує воду величиною з його потужність
+        public abstract int GetWhater();
+
+        //Вмикає насос
+        public abstract void TurnOnPump();
+
+        //Вимикає насос
+        public abstract void TurnOffPump();
+
+        //Перевіряє чи насос увімкнено
+        public abstract bool IsPumpTurn();
+
+        public override string ToString()
         {
-            if (_turn)
-            {
-                return _power;
-            }
-            return 0;
-        }
-        public void TurnOnPump()
-        {
-            _turn = true;
-        }
-        public void TurnOffPump()
-        {
-            _turn = false;
-        }
-        public bool IsPumpTurn()
-        { 
-            return _turn; 
+            return String.Format("Pump is turn? - {0}. Power of Pump - {1}", _turn, _power);
         }
 
     }

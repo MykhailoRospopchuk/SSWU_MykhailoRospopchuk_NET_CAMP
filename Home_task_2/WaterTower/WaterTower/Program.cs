@@ -5,8 +5,10 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            Simulator test = new Simulator(3, 8, 44, 8);
+            var input = Validator.Input();
+            Simulator test = new Simulator(input.Item1, input.Item2, input.Item3, input.Item4);
             test.Start();
+            Console.WriteLine(test.ToString());
         }
     }
 }

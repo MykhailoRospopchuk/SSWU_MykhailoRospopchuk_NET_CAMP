@@ -1,6 +1,8 @@
-﻿namespace WaterTower
+﻿using System.Text;
+
+namespace WaterTower
 {
-    internal class Simulator
+    internal abstract class Simulator
     {
         private User _user;
         private Pump _pump;
@@ -13,56 +15,25 @@
             _tower = new Tower(max_level, current_level);
         }
 
-        public void Start()
-        {
-            _pump.TurnOnPump();
-            Console.WriteLine("Start simulation \nPress any key to stop simulation");
-            ControllerLevelWater();
-            _pump.TurnOffPump();
-            Console.WriteLine("End simulation");
-        }
+        //Запускає симуляцію процесу
+        public abstract void Start();
 
-        private void ControllerLevelWater()
-        {
-            bool marker_pump = false;
-            while (!Console.KeyAvailable)
-            {
-                if (_tower.IsOwerMinLevel(_user.GetConsumption()))
-                {
-                    marker_pump = true;
-                }
-                if (marker_pump)
-                {
-                    PumpWater();
-                    if (!_tower.IsUnderMaxLevel(_pump.Power))
-                    {
-                        marker_pump = false;
-                    }
-                }
-                GetWater();
-                Thread.Sleep(500);
-            } 
-        }
+        //Контролює процес спуску і закачування води в вежу
+        public abstract void ControllerLevelWater();
+        
+        //Організація закачки води в вежу
+        public abstract void PumpWater();
 
-        private void PumpWater()
-        {
-            if (_pump.IsPumpTurn())
-            {
-                int water = _pump.GetWhater();
-                _tower.WaterIncrease(water);
-                Console.WriteLine("Pump water IN Tower. Current level: {0}", _tower.GetCurrentLevel());
-            }
-            else
-            {
-                Console.WriteLine("Pump IS TURN OFF");
-            }
-        }
+        //Організація спуску води з вежі
+        public abstract void GetWater();
 
-        private void GetWater()
+        public override string ToString()
         {
-            int water = _user.GetConsumption();
-            _tower.WaterDecrease(water);
-            Console.WriteLine("Consumpt water FROM Tower. Current level: {0}", _tower.GetCurrentLevel());
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(_user.ToString());
+            sb.AppendLine(_pump.ToString());
+            sb.AppendLine(_tower.ToString());
+            return sb.ToString();
         }
     }
 }

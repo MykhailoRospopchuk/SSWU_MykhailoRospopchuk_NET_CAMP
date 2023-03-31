@@ -49,7 +49,7 @@ namespace exercise_2
                 begin_temp[0] = i;
                 begin_temp[1] = 0;
                 for (int j = 1; j < _column; j++)
-                {
+                {// Не оптимально
                     if (_color_arr[begin_temp[0], begin_temp[1]] == _color_arr[i, j])
                     {
                         if (j - begin_temp[1] > lenght)
@@ -69,6 +69,7 @@ namespace exercise_2
                 }
             }
             lenght++;
+            // роздрук в цьому методі не доречний. Результат слід повертати як параметри методу.
             Console.WriteLine("Color is: {0}", _color_arr[begin_index[0], begin_index[1]]);
             Console.WriteLine("Lenght = {0}", lenght);
             Console.WriteLine("Begin index: [{0}, {1}]", begin_index[0], begin_index[1]);

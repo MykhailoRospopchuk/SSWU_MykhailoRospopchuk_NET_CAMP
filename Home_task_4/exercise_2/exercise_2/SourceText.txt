@@ -1,0 +1,31 @@
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Дійсні електронні адреси
+
+Дійсні simple@example.com
+very.common@example.com
+Дійсні disposable.style.email.with+symbol@example.com
+Дійсні other.email-with-hyphen@example.com
+Дійсні fully-qualified-domain@example.com
+user.name+tag+sorting@example.com (може перейти до вхідних повідомлень user.name@example.com залежно від поштового сервера)
+Дійсні x@example.com (локальна частина з однією буквою)
+Дійсні example-indeed@strange-example.com
+Дійсні admin@mailserver1 (локальне доменне ім'я без TLD, хоча ICANN дуже відлякує бездоганні електронні адреси[5])
+Дійсні example@s.example (див. Список Інтернет-доменів вищого рівня)
+Дійсні " "@example.org (пробіл між цитатами)
+Дійсні "john..doe"@example.org (цитується подвійна крапка)
+Дійсні mailhost!username@example.org (гангфікований маршрут хоста, який використовується для пошти uucp)
+Дійсні user%example.com@example.org (% user%example.com@example.org маршруту пошти до user@example.com через example.org)
+
+Недійсні адреси електронної пошти
+НеДійсні Abc.example.com (без символу @)
+НеДійсні A@b@c@example.com (тільки один @ дозволений поза лапок)
+НеДійсні a"b(c)d,e:f;g<h>i[j\k]l@example.com (жоден із спеціальних символів у цій локальній частині не допускається поза лапок)
+НеДійсні just"not"right@example.com (just"not"right@example.com рядки повинні бути розділені крапками або єдиний елемент, що складається з локальної частини)
+НеДійсні this is"not\allowed@example.com (пробіли, лапки та косої риски можуть існувати лише тоді, коли в цитованих рядках і передує зворотна косої риски)
+НеДійсні this\ still\"not\\allowed@example.com (навіть якщо уникнути (передує зворотній косої риси), пробіли, лапки та косої риски все одно повинні міститись лапками)
+НеДійсні 1234567890123456789012345678901234567890123456789012345678901234+x@example.com (місцева частина довша 64 символів)
+НеДійсні i_like_underscore@but_its_not_allow_in _this_part.example.com (Підкреслення заборонено в частині домену)

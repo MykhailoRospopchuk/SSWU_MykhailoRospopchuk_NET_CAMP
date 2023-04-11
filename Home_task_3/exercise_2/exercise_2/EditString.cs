@@ -24,7 +24,7 @@ namespace exercise_2
 
         //The second exercise
         public static int FindUpperCase(string str_source)
-        {
+        { // Тут перемудрили. Все значно простіше. Поясню...
             int index_out = 0;
 
             int count = 0;
@@ -46,6 +46,7 @@ namespace exercise_2
                 {
                     count++;
                     index_out++;
+                    //Уникайте...
                     continue;
                 }
                 else
@@ -73,7 +74,7 @@ namespace exercise_2
 
         //The third exercise
         public static string ReplaceDouble(string str_source, string str_replace)
-        {
+        {// знову ж алгоритмічно ускладнено...
             string[] string_array = str_source.Split(' ');
             StringBuilder result_str = new StringBuilder();
             int iterator = 0;

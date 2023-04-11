@@ -6,7 +6,7 @@ namespace exercise_2
     {
         //The first exercise
         public static int? FindString(string str_source, string str_found)
-        {
+        {// Можна з тернарним в одну стрічку
             //Looking for the first occurrence of the searched string.
             int first_index = str_source.IndexOf(str_found);
             if (first_index == -1)

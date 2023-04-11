@@ -1,4 +1,5 @@
 ﻿
+ // 1 задача. Синглтон вітається. Симулятор, як не дуже добре зроблений посередник між баштою і помпою -ні. Хто буде створювати користувача -не зрозуміло. 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290

@@ -8,6 +8,7 @@ namespace exercise_2
         {
             Console.WriteLine("Hello, World!");
 
+
             //If the file has not been created, it will be automatically created to enter the source text for verification
             FileWorker.InitFile();
             //Read from the file

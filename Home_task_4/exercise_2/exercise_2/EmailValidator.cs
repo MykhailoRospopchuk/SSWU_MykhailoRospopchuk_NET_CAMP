@@ -24,8 +24,69 @@ namespace exercise_2
             return result;
         }
 
-        //Performs validation of selected candidates
-        public static (List<string>, List<string>) SeparateValid(List<string> emails)
+        //Performs custom validation a list of selected candidates
+        public static (List<string>, List<string>) SeparateValidCustom(List<string> emails)
+        {
+            List<string> valid = new List<string>();
+            List<string> non_valid = new List<string>();
+
+            emails.ForEach(email =>
+            {
+                if (ValidatorEmail(email)) valid.Add(email);
+                else non_valid.Add(email);
+            });
+
+            return (valid, non_valid);
+        }
+
+        //Directly the custom validation method
+        private static bool ValidatorEmail(string email)
+        {
+            int index_et = email.LastIndexOf('@');
+            string domain = email.Substring(index_et + 1);
+            string local = email.Substring(0, index_et);
+
+            string valid_chars_local = "!#$%&'*+-/=?^_`{|}~.";
+            string valid_chars_domain = "-.";
+
+            if (local.Length > 64) return false;
+
+            bool local_in_double_quotes = local.EndsWith("\"") && local.StartsWith("\"");
+
+            if (local.Length == 0 || domain.Length == 0) return false;
+
+            if (local_in_double_quotes && local.Length == 1) return false;
+
+            if (!local_in_double_quotes)
+            {
+                foreach (char current_char in local)
+                {
+                    if (!Char.IsLetterOrDigit(current_char) && !valid_chars_local.Contains(current_char)) return false;
+                }
+
+                if (local.IndexOf('.') != -1 && local[local.IndexOf('.') + 1] == '.') return false;
+
+                if (local.EndsWith('.') || local.StartsWith('.')) return false;
+            }
+
+            if (domain.StartsWith('-') || domain.EndsWith('-')) return false;
+
+            if (domain.StartsWith('.') || domain.EndsWith('.')) return false;
+
+            if (domain.IndexOf('.') != -1 && domain[domain.IndexOf('.') + 1] == '.') return false;
+
+            foreach (char current_char in domain)
+            {
+                if (!Char.IsLetterOrDigit(current_char) && !valid_chars_domain.Contains(current_char)) return false;
+            }
+
+            return true;
+        }
+
+
+        //This method was added ONLY to visually compare the results with the custom method
+        //Performs validation of selected candidates using Regex
+        public static (List<string>, List<string>) SeparateValidRegex(List<string> emails)
         {
             List<string> valid = new List<string>();
             List<string> non_valid = new List<string>();

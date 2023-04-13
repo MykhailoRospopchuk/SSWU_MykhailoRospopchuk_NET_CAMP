@@ -6,6 +6,8 @@ It was popularised in the 1960s with the release of Letraset sheets containing L
 Дійсні електронні адреси
 
 Дійсні simple@example.com
+Дійсні simple@ex(amp)le.com
+Дійсні si(mpl)e@example.com
 Дійсні very.common@example.com
 Дійсні disposable.style.email.with+symbol@example.com
 Дійсні other.email-with-hyphen@example.com
@@ -21,6 +23,9 @@ user.name+tag+sorting@example.com (може перейти до вхідних �
 Дійсні user%example.com@example.org (% user%example.com@example.org маршруту пошти до user@example.com через example.org)
 
 Недійсні адреси електронної пошти
+Недійсні si)(mple@example.com
+Недійсні si)mple@example.com
+Недійсні simple@exam(ple.com
 Недійсні simple@examp!le.com
 Недійсні .disposable.style.email.with+symbol@example.com
 НеДійсні Abc.example.com (без символу @)

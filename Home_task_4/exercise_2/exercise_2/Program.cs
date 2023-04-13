@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-
+﻿
 namespace exercise_2
 {
     internal class Program
@@ -7,7 +6,6 @@ namespace exercise_2
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-
 
             //If the file has not been created, it will be automatically created to enter the source text for verification
             FileWorker.InitFile();

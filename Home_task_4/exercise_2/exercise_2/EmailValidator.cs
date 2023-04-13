@@ -1,4 +1,5 @@
-﻿//This class directly validates the proposed email addresses
+﻿
+//This class directly validates the proposed email addresses
 using System.Text.RegularExpressions;
 
 namespace exercise_2
@@ -46,8 +47,8 @@ namespace exercise_2
             string domain = email.Substring(index_et + 1);
             string local = email.Substring(0, index_et);
 
-            string valid_chars_local = "!#$%&'*+-/=?^_`{|}~.";
-            string valid_chars_domain = "-.";
+            string valid_chars_local = "!#$%&'*+-/=?^_`{|}~.()";
+            string valid_chars_domain = "-.()";
 
             if (local.Length > 64) return false;
 
@@ -59,6 +60,8 @@ namespace exercise_2
 
             if (!local_in_double_quotes)
             {
+                if (!CommentIsCorrect(local)) return false;
+
                 foreach (char current_char in local)
                 {
                     if (!Char.IsLetterOrDigit(current_char) && !valid_chars_local.Contains(current_char)) return false;
@@ -68,6 +71,8 @@ namespace exercise_2
 
                 if (local.EndsWith('.') || local.StartsWith('.')) return false;
             }
+
+            if (!CommentIsCorrect(domain)) return false;
 
             if (domain.StartsWith('-') || domain.EndsWith('-')) return false;
 
@@ -82,9 +87,19 @@ namespace exercise_2
 
             return true;
         }
+        //Checking for the correct use of comments
+        private static bool CommentIsCorrect(string part_email)
+        {
+            int first_bracket = part_email.IndexOf('(');
+            int second_bracket = part_email.IndexOf(')');
+
+            if (first_bracket == -1 && second_bracket == -1) return true;
+            else if ((first_bracket != -1 && second_bracket != -1) && second_bracket > first_bracket) return true;
+            else return false;
+        }
 
 
-        //This method was added ONLY to visually compare the results with the custom method
+        //This method was added ONLY to visually COMPARE the results with the custom method!!!
         //Performs validation of selected candidates using Regex
         public static (List<string>, List<string>) SeparateValidRegex(List<string> emails)
         {

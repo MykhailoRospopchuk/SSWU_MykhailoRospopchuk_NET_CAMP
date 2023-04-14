@@ -90,11 +90,15 @@ namespace exercise_2
         //Checking for the correct use of comments
         private static bool CommentIsCorrect(string part_email)
         {
-            int first_bracket = part_email.IndexOf('(');
-            int second_bracket = part_email.IndexOf(')');
+            int open_bracket = part_email.IndexOf('(');
+            int close_bracket = part_email.IndexOf(')');
+            int last_open_bracket = part_email.LastIndexOf('(');
+            int last_close_bracket = part_email.LastIndexOf(')');
 
-            if (first_bracket == -1 && second_bracket == -1) return true;
-            else if ((first_bracket != -1 && second_bracket != -1) && second_bracket > first_bracket) return true;
+            if (last_open_bracket > last_close_bracket) return false;
+
+            if (open_bracket == -1 && close_bracket == -1) return true;
+            else if ((open_bracket != -1 && close_bracket != -1) && close_bracket > open_bracket) return true;
             else return false;
         }
 

@@ -1,4 +1,8 @@
-﻿using System.Globalization;
+﻿//  The class models the essence of the quarter in the program
+//  Stores data on the number of entries in the quarter,
+//the quarter number and the list of months of the quarter
+//  It has two constructors for creation - directly by entering arguments and the second one that accepts an array of strings
+using System.Globalization;
 using System.Text;
 
 namespace exercise_3
@@ -23,6 +27,7 @@ namespace exercise_3
             CreateQuaerter(_quarter_number);
         }
 
+        //Creates a list of quarter months according to the quarter number
         private void CreateQuaerter(int quarter)
         {
             _quarter_month.Add((new DateTime(DateTime.Now.Year, quarter * 3 - 2, 1)).ToString("MMMM", CultureInfo.GetCultureInfo("en-US")));

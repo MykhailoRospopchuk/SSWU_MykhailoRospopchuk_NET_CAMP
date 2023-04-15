@@ -1,4 +1,6 @@
-﻿
+﻿//  This class models a single record from a quarter
+//  If there are no measurements for a certain month, they are filled with default values
+//  Two constructors have been created to accept both named arguments and an array of strings
 
 namespace exercise_3
 {
@@ -76,6 +78,8 @@ namespace exercise_3
             get { return _measurements_date_month_3; }
         }
 
+        //Finds the value of the total debt for one record.
+        //Uses the currency rate value from the static class Currency.
         public double SumDept()
         {
             double debt = 0;
@@ -91,12 +95,14 @@ namespace exercise_3
             return debt * exchange_rate;
         }
 
+        //Calculates the number of days since the last measurement.
         public double GetTimeSpend()
         {
             double result = _measurements_date_month_3 == default ? (_measurements_date_month_2 == default ? (_measurements_date_month_2 == default ? 0 : (DateTime.Now - _measurements_date_month_1).TotalDays) : (DateTime.Now - _measurements_date_month_2).TotalDays) : (DateTime.Now - _measurements_date_month_3).TotalDays;
             return result;
         }
 
+        //Returns a string that will be written directly to a text file.
         public string GetStingToWrite()
         {
             string date_1 = _measurements_date_month_1 == default ? "" : _measurements_date_month_1.ToString("dd.MM.yyyy");

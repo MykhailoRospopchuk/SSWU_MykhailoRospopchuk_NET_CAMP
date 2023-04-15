@@ -1,4 +1,4 @@
-﻿
+﻿//A statiс class to check the data based on which the user wants to create a new record in the current quarter
 using System.Globalization;
 
 namespace exercise_3
@@ -25,17 +25,17 @@ namespace exercise_3
                     throw new Exception("Electricity measurements cannot be negative");
                 }
                 var current_quarter = Database.ReadQuarter().Month;
-                if (!(DateTime.Parse(args[6]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US")) == current_quarter[0]))
+                if (args[6] != "" && !(DateTime.Parse(args[6]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US")) == current_quarter[0]))
                 {
                     throw new Exception($"The first month {DateTime.Parse(args[6]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US"))}is not the first month of the current quarter {current_quarter[0]}");
                 }
-                if (!(DateTime.Parse(args[7]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US")) == current_quarter[1]))
+                if (args[7] != "" && !(DateTime.Parse(args[7]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US")) == current_quarter[1]))
                 {
-                    throw new Exception($"The first month {DateTime.Parse(args[7]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US"))}is not the first month of the current quarter {current_quarter[1]}");
+                    throw new Exception($"The second month {DateTime.Parse(args[7]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US"))}is not the second month of the current quarter {current_quarter[1]}");
                 }
-                if (!(DateTime.Parse(args[8]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US")) == current_quarter[2]))
+                if (args[8] != "" && !(DateTime.Parse(args[8]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US")) == current_quarter[2]))
                 {
-                    throw new Exception($"The first month {DateTime.Parse(args[8]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US"))}is not the first month of the current quarter {current_quarter[2]}");
+                    throw new Exception($"The third month {DateTime.Parse(args[8]).ToString("MMMM", CultureInfo.GetCultureInfo("en-US"))}is not the third month of the current quarter {current_quarter[2]}");
                 }
             }
             catch (Exception ex)

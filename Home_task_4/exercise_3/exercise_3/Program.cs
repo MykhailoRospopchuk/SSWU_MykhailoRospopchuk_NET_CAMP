@@ -9,6 +9,7 @@ namespace exercise_3
         {
             Console.OutputEncoding = Encoding.UTF8;
             CultureInfo.CurrentCulture = new CultureInfo("ua-UA", false);
+
             Console.WriteLine("Hello, World!");
 
             Menu.MainMenu();

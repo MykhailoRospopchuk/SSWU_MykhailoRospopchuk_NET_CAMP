@@ -1,4 +1,7 @@
-﻿
+﻿// This static class is responsible for working with text files.
+// The fields store information about the path to the system file, the current quarter, the path to the working files of the current quarter
+using System.Collections.Generic;
+
 namespace exercise_3
 {
     internal static class Database
@@ -9,6 +12,9 @@ namespace exercise_3
         private static string _current_file_record = "";
         private static string _current_file_quarter = "";
 
+        //When the constructor is called, it is checked whether a system file with a list of quarters exists.
+        //If not, it is created.
+        //If it exists, the list of quarters is read into the static field of the class
         static Database()
         {
             if (!File.Exists(_system_path))
@@ -18,6 +24,7 @@ namespace exercise_3
             ReadSystem();
         }
 
+        //The method is responsible for reading the list of quarters from the system file
         private static void ReadSystem()
         {
             List<string> result = new List<string>();
@@ -39,6 +46,7 @@ namespace exercise_3
             _quarter_files = result;
         }
 
+        //The method is responsible for writing the quarter to the system file
         private static void WriteSystem(string income)
         {
             if (File.Exists(_system_path))
@@ -50,6 +58,8 @@ namespace exercise_3
             }
         }
 
+        //The method is responsible for entering a new quarter into the system file.
+        //When you create a new quarter, it is automatically defined as the current quarter to work with
         public static void SetQuarterFileName(EnergyQuarter income_quarter, DateTime year)
         {
             string current = $"{year.ToString("yyyy")}-{income_quarter.QuarterNumber}";
@@ -61,24 +71,33 @@ namespace exercise_3
                 _current_quarter = current;
             }
         }
-        public static List<string> GetQuarterList()
-        {
-            return _quarter_files;
-        }
+
+        //The method is used to set the current quarter from the list of previously created quarters by the number of the quarter in the list
         public static void SetCurrentQuarter(int id)
         {
             _current_quarter = _quarter_files[id - 1];
         }
-        public static string CheckCurrentQuarter()
-        {
-            return _current_quarter;
-        }
 
+        //The method creates a path to the working files and stores them in the corresponding fields of the class
+        //In the future, these fields will be used to access specific files
         public static void SetCurrentFilePath()
         {
             _current_file_record = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, $"{_current_quarter}-Energy.txt");
             _current_file_quarter = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, $"{_current_quarter}-Quarter.txt");
         }
+
+        //The method returns the value of the current quarter
+        public static string CheckCurrentQuarter()
+        {
+            return _current_quarter;
+        }
+
+        //The method returns the list of all registred quarter
+        public static List<string> GetQuarterList()
+        {
+            return _quarter_files;
+        }
+
         //Methot wich create file if it not exist
         public static void InitFile()
         {
@@ -93,6 +112,7 @@ namespace exercise_3
             }
         }
 
+        //The method makes an new record in the working text file of the records of the current quarter
         public static void WriteRecord(EnergyRecord record)
         {
             if (File.Exists(_current_file_record))
@@ -102,8 +122,10 @@ namespace exercise_3
                     file.WriteLine(record.GetStingToWrite());
                 }
             }
-            UpdateQuarter();
+            UpdateQuarter(); //Сall the method for updating the number of records in the information about the current quarter
         }
+
+        //The method reads all records in the current quarter
         public static List<EnergyRecord> ReadAllRecord()
         {
             List<EnergyRecord> result = new List<EnergyRecord>();
@@ -122,6 +144,7 @@ namespace exercise_3
             return result;
         }
 
+        //The method reads one record from the current quarter by its number in the current quarter
         public static EnergyRecord ReadRecordByID(int id)
         {
             string result = "";
@@ -157,6 +180,7 @@ namespace exercise_3
             return record;
         }
 
+        //The method checks whether there is a record for the specified number in the current quarter
         public static bool ExistID(int id)
         {
             bool marker = true;
@@ -177,9 +201,11 @@ namespace exercise_3
             return !marker;
         }
 
-        public static EnergyRecord FindBiggestDebt()
+        //The method finds a list of records that have the highest debt value in the current quarter.
+        //If the debt is the same in several records, all records with the same debt will be returned
+        public static List<EnergyRecord> FindBiggestDebt()
         {
-            EnergyRecord record = null;
+            List<EnergyRecord> record = new List<EnergyRecord>();
             EnergyRecord temp;
             if (File.Exists(_current_file_record))
             {
@@ -191,15 +217,26 @@ namespace exercise_3
                     {
                         if ((temp = new EnergyRecord(line.Split(';'))).SumDept() >= debt)
                         {
-                            record = temp;
                             debt = temp.SumDept();
                         }
                     }
+                    
                 }
+                using (StreamReader file = new StreamReader(_current_file_record))
+                {
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        if ((temp = new EnergyRecord(line.Split(';'))).SumDept() == debt)
+                        {
+                            record.Add(temp);
+                        }
+                    }
+                } 
             }
             return record;
         }
 
+        //The method returns a list of entries in the current quarter that have zero consumption
         public static List<EnergyRecord> FindNoConsume()
         {
             List<EnergyRecord> record = new List<EnergyRecord>();
@@ -221,6 +258,7 @@ namespace exercise_3
             return record;
         }
 
+        //Deletes all records from the current quarter
         public static void ClearRecords()
         {
             if (File.Exists(_current_file_record))
@@ -233,6 +271,7 @@ namespace exercise_3
             UpdateQuarter();
         }
 
+        //Returns the number of records in the current quarter
         public static int CountRecords()
         {
             int line_count = 0;
@@ -254,6 +293,7 @@ namespace exercise_3
         //For working with Quarter
         //________________________
 
+        //Writes quarter data to the current quarter file
         public static void WriteQuarter(int income)
         {
             int count_consumer = CountRecords();
@@ -266,6 +306,8 @@ namespace exercise_3
             }
         }
 
+        //Updates data about the current quarter.
+        //Used to update the number of records in a quarter
         public static void UpdateQuarter()
         {
             int count_consumer = CountRecords();
@@ -288,6 +330,7 @@ namespace exercise_3
             }
         }
 
+        //Reads data about the current quarter
         public static EnergyQuarter ReadQuarter()
         {
             EnergyQuarter quarter_info = null;
@@ -305,6 +348,7 @@ namespace exercise_3
             return quarter_info;
         }
 
+        //Checks whether information for the current quarter is written to the file
         public static bool QuarterFileEmpty()
         {
             bool quarter_info = true;

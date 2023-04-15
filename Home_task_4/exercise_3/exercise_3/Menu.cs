@@ -1,8 +1,11 @@
-﻿
+﻿//Statiс class for communicating with the user
+using System.Collections.Generic;
+
 namespace exercise_3
 {
     internal static class Menu
     {
+        //Save the menu options that will be displayed on the screen
         private static string[] _options = {
             "1 - Get all records by quarter",
             "2 - Get a specific entry in the quarter",
@@ -14,6 +17,8 @@ namespace exercise_3
             "8 - Set new record",
             "9 - Exit"
         };
+
+        //The method displays the list of options on the screen
         private static void PrintMenu()
         {
             Console.WriteLine("--------------MENU--------------");
@@ -23,6 +28,7 @@ namespace exercise_3
             }
         }
 
+        //The method used to check if the current quarter is selected.
         private static void SignInQuarter()
         {
             if (Database.CheckCurrentQuarter() == "")
@@ -33,16 +39,17 @@ namespace exercise_3
             else 
             {
                 Console.WriteLine("Quarter is selected: " + Database.CheckCurrentQuarter());
-            };
+            }
         }
 
+        //The main method in the menu, which calls the corresponding methods according to the user's selection
         public static void MainMenu()
         {
             int user_option = 0;
             while (true)
             {
-                PrintMenu();
-                SignInQuarter();
+                PrintMenu();//Display a list of options
+                SignInQuarter();//Check for the selected current quarter
                 try
                 {
                     user_option = Convert.ToInt32(Console.ReadLine());
@@ -94,14 +101,17 @@ namespace exercise_3
                 }
             }
         }
-        
+
         // 1
+        //The method organizes reading and outputting to the console information about the current quarter
+        //and entries in the quarter
         public static void GetAllRecordsByQuarter()
         {
             try
             {
                 var result = Database.ReadAllRecord();
                 var current_quarter = Database.ReadQuarter();
+                Console.WriteLine("All Records By Current Quarter:");
                 View.PrintHeadRecord(current_quarter);
                 result.ForEach(record => View.PrintFormatedRecord(record));
             }
@@ -113,6 +123,8 @@ namespace exercise_3
         }
 
         // 2
+        //The method organizes reading and outputting to the console information about the current quarter
+        //and a specific entry in the quarter by its number
         public static void GetOneRecordsByQuarter()
         {
             int id = 0;
@@ -126,6 +138,7 @@ namespace exercise_3
                 {
                     throw new Exception("No such record found");
                 }
+                Console.WriteLine("One Records By Current Quarter:");
                 View.PrintHeadRecord(current_quarter);
                 View.PrintFormatedRecord(record);
             }
@@ -137,14 +150,17 @@ namespace exercise_3
         }
 
         // 3
+        //The method organizes reading and outputting to the console information about the current quarter
+        //and the record with the largest debt
         public static void GetRecordWithMostDebt()
         {
             try
             {
-                var record = Database.FindBiggestDebt();
+                var result = Database.FindBiggestDebt();
                 var current_quarter = Database.ReadQuarter();
+                Console.WriteLine("RecordsWith Most Debt:");
                 View.PrintHeadRecord(current_quarter);
-                View.PrintFormatedRecord(record);
+                result.ForEach(record => View.PrintFormatedRecord(record));
             }
             catch (Exception ex)
             {
@@ -154,12 +170,15 @@ namespace exercise_3
         }
 
         // 4
+        //The method organizes reading and outputting to the console information about the current quarter
+        //and writing with zero consumption during the current quarter
         public static void GetRecordWithoutConsumption()
         {
             try
             {
                 var record = Database.FindNoConsume();
                 var current_quarter = Database.ReadQuarter();
+                Console.WriteLine("Records Without Consumption:");
                 View.PrintHeadRecord(current_quarter);
                 record.ForEach(r => View.PrintFormatedRecord(r));
             }
@@ -171,6 +190,8 @@ namespace exercise_3
         }
 
         // 5
+        //The method organizes the creation of a new quarter, the creation of a path to the work files of the quarter,
+        //the creation of work files, the recording of information about the quarter in the work file of the quarter
         private static void SpecifyNewQuarter()
         {
             int quarter = 1;
@@ -207,6 +228,9 @@ namespace exercise_3
         }
 
         // 6
+        //The method organizes the indication of the current quarter from the list of previously created quarters.
+        //A check for the existence of the files of the selected quarter is performed.
+        //If the files are missing, they are automatically recreated
         private static void ChooseQuarter()
         {
             var quarters = Database.GetQuarterList();
@@ -237,10 +261,12 @@ namespace exercise_3
                 {
                     Database.WriteQuarter(user_quarter);
                 }
+                Database.UpdateQuarter();
             }
         }
 
         // 7
+        //The method organizes the entry of the exchange rate by the user
         private static void SetCurrencyRate()
         {
             double quarr = 1;
@@ -267,6 +293,7 @@ namespace exercise_3
         }
 
         // 8
+        //The method organizes the entry of a new entry in the current quarter by the user
         private static void SetNewRecord()
         {
             try

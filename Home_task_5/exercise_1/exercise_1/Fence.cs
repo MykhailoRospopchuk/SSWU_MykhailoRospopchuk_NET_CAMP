@@ -1,4 +1,6 @@
-﻿
+﻿//This class is used to model a fence.
+//An instance of this class stores a list of trees belonging to the fence
+//and an array with the lengths of each section of the fence
 using System.Text;
 
 namespace exercise_1
@@ -19,11 +21,11 @@ namespace exercise_1
             return _point_trees.Contains(tree);
         }
 
-        public List<PointTree> FenceTree
+        public List<PointTree> GetFenceTree
         {
             get { return _point_trees; }
         }
-        public List<double> Length
+        public List<double> GetLength
         {
             get { return _fence_length; }
         }

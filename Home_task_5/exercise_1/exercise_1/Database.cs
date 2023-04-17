@@ -1,15 +1,9 @@
-﻿namespace exercise_1
+﻿//This static class is used to work with text files in which the results of the work will be written
+namespace exercise_1
 {
     internal static class Database
     {
         private static string _system_path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Garden.txt");
-        static Database()
-        {
-            if (!File.Exists(_system_path))
-            {
-                using (FileStream fs = File.Create(_system_path));
-            }
-        }
 
         public static void SetCurrentFile(string file_name = "Garden")
         {

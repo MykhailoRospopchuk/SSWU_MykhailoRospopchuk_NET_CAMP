@@ -1,4 +1,4 @@
-﻿
+﻿//This static class is used to create an image that will show the trees according to their Cartesian coordinates and the fence line
 namespace exercise_1
 {
     internal static class PlotGarden
@@ -44,7 +44,7 @@ namespace exercise_1
             double border_x = (max_axis_x - min_axis_x) * 0.2;
             double border_y = (max_axis_y - min_axis_y) * 0.2;
 
-            var plt = new ScottPlot.Plot(800, 800);
+            var plt = new ScottPlot.Plot(1400, 1400);
             plt.SetAxisLimits(min_axis_x - border_x, max_axis_x + border_x, min_axis_y - border_y, max_axis_y + border_y);
             plt.AddScatter(fenceX.ToArray(), fenceY.ToArray());
             var sp = plt.AddScatter(dataX.ToArray(), dataY.ToArray(), lineWidth: 0, markerSize: 10);

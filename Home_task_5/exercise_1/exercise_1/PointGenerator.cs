@@ -1,4 +1,5 @@
-﻿namespace exercise_1
+﻿//This static class returns a list of trees with randomly generated coordinates.
+namespace exercise_1
 {
     internal static class PointGenerator
     {

@@ -49,7 +49,6 @@ namespace exercise_2
                 {
                     if (item.Title == depart)
                     {
-                        Console.WriteLine($"{depart} found");
                         item.PutItem(income_item);
                         return item;
                     }

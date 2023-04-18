@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace WaterTower
-{
+{// У загальному спроєктовано добре. З автоматичним включенням і виключенням буде біда в реалізації, якщо нема часу...
     internal abstract class Pump
     {
         private bool _turn = false;

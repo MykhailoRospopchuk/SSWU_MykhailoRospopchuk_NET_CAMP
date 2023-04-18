@@ -8,7 +8,7 @@
         {
             _consumption = consumption;
         }
-
+// Як повідомляє світу, коли запит не виконався?
         //Отримуємо на запит значення споживання користувача
         public abstract int GetConsumption();
         public override string ToString()

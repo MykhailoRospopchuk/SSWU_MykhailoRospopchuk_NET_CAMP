@@ -11,11 +11,9 @@ namespace exercise_2
             "2 - Create new Supermarket",
             "3 - Show list of Supermarkets",
             "4 - Create a structure in a supermarket",
-            "5 - Show created Supermarkets",
-            "6 - Add product to department",
-            "7 - ",
-            "8 - ",
-            "9 - Exit"
+            "5 - Add product to department",
+            "6 - Show created Supermarkets",
+            "7 - Exit"
         };
 
         //The method displays the list of options on the screen
@@ -69,22 +67,16 @@ namespace exercise_2
                         CreateStructureSupermarket();
                         break;
                     case 5:
-                        ShowCreatedSupermarkets();
-                        break;
-                    case 6:
                         AddProductToDepartment();
                         break;
+                    case 6:
+                        ShowCreatedSupermarkets();
+                        break;
                     case 7:
-                      
-                        break;
-                    case 8:
-                      
-                        break;
-                    case 9:
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Please enter an integer value between 1 and " + _options.Length + "or 9 for exit");
+                        Console.WriteLine("Please enter an integer value between 1 and " + _options.Length + "or 7 for exit");
                         break;
                 }
             }
@@ -106,7 +98,7 @@ namespace exercise_2
             Console.WriteLine(new string('-', 100));
 
             Item ATBExample = _storage.GetExamplesSupermarketById(1);
-            Console.WriteLine("Hello, World! SilpoExample");
+            Console.WriteLine("Hello, World! ATBExample");
             Console.WriteLine(ATBExample.Print(0));
             Console.WriteLine(new string('-', 100));
         }
@@ -145,22 +137,9 @@ namespace exercise_2
                 string custom_path = Console.ReadLine();
                 current_market.CreatePath(custom_path.Split('/'), 0);
             }
-            catch (Exception ex)
+            catch (System.FormatException)
             {
-                Console.WriteLine(ex);
-            }
-        }
-
-        private static void ShowCreatedSupermarkets()
-        {
-            try
-            {
-                Console.WriteLine("Select a supermarket from the list");
-                _storage.PrintSupermarket();
-                int id_market = Convert.ToInt32(Console.ReadLine());
-                Item current_market = _storage.GetSupermarketById(id_market);
-                Console.WriteLine($"Market - {current_market.Title}");
-                Console.WriteLine(current_market.Print(0));
+                Console.WriteLine("Please enter an integer value");
             }
             catch (Exception ex)
             {
@@ -182,7 +161,7 @@ namespace exercise_2
                 Console.WriteLine("Enter the name of Product:");
                 string product_name = Console.ReadLine();
 
-                Console.WriteLine("Enter the Department in which the Зroduct will be located:");
+                Console.WriteLine("Enter the Department in which the Product will be located:");
                 string product_department = Console.ReadLine();
 
                 Console.WriteLine("Enter the Height of Product:");
@@ -194,10 +173,45 @@ namespace exercise_2
                 Console.WriteLine("Enter the Lenght of Product:");
                 int product_lenght = Convert.ToInt32(Console.ReadLine());
 
-                current_market.SetItemInDepart(product_department, new Item(false, product_name, product_lenght, product_height, product_width));
-
+                var result = current_market.SetItemInDepart(product_department, new Item(false, product_name, product_lenght, product_height, product_width));
+                if (result == null)
+                {
+                    throw new Exception("Something went wrong");
+                }
                 Console.WriteLine($"Market - {current_market.Title}");
                 Console.WriteLine(current_market.Print(0));
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("Please enter an integer value");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        private static void ShowCreatedSupermarkets()
+        {
+            try
+            {
+                if (_storage.IsSupermarketListEmpty())
+                {
+                    Console.WriteLine("You have not created any supermarket yet!\nCreate a new supermarket using a menu");
+                }
+                else
+                {
+                    Console.WriteLine("Select a supermarket from the list");
+                    _storage.PrintSupermarket();
+                    int id_market = Convert.ToInt32(Console.ReadLine());
+                    Item current_market = _storage.GetSupermarketById(id_market);
+                    Console.WriteLine($"Market - {current_market.Title}");
+                    Console.WriteLine(current_market.Print(0));
+                }
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("Please enter an integer value");
             }
             catch (Exception ex)
             {

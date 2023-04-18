@@ -16,6 +16,14 @@ namespace exercise_2
             set { _supermarket_examples.Add(value); }
         }
 
+        public bool IsSupermarketListEmpty()
+        {
+            if (_supermarket.Count() == 0)
+            {
+                return true;
+            }
+            return false;
+        }
         public void PrintSupermarket()
         {
             int counter = 0;

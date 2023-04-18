@@ -1,4 +1,4 @@
-﻿
+﻿//
 using System.Text;
 
 namespace exercise_2
@@ -29,7 +29,11 @@ namespace exercise_2
             {
                 if (!_items.Any(ite => ite.Title == path[i]))
                 {
-                    _items.Add(new Item(true, path[i]));
+                    var result = this.PutItem(new Item(true, path[i]));
+                    if (!result)
+                    {
+                        throw new Exception("A box can contain either product boxes or department boxes.\nYou cannot put a product and a department in the same box");
+                    }
                     temp = _items.LastOrDefault();
                 }
                 else
@@ -49,7 +53,11 @@ namespace exercise_2
                 {
                     if (item.Title == depart)
                     {
-                        item.PutItem(income_item);
+                        var result = item.PutItem(income_item);
+                        if (!result)
+                        {
+                            throw new Exception("A box can contain either product boxes or department boxes.\nYou cannot put a product and a department in the same box");
+                        }
                         return item;
                     }
                 }
@@ -98,7 +106,6 @@ namespace exercise_2
             }
             return false;
         }
-        public List<Item> GetItems() { return _items; }
 
         public void CountMetrix()
         {
@@ -143,8 +150,6 @@ namespace exercise_2
             }
             return _lenght;
         }
-        public bool InsideCommodity
-        { get { return _product_inside; } }
 
         public bool IsBox
         { get { return _box; } }

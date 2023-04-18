@@ -5,7 +5,6 @@ namespace exercise_2
     {
         public static Item GenerateSilpo()
         {
-            //Console.WriteLine("Hello, World! SilpoExample");
             Item SilpoExample = new Item(true, "SilpoExample");
 
             Item meat = new Item(true, "Meat");
@@ -37,14 +36,11 @@ namespace exercise_2
 
             SilpoExample.SetItemInDepart("Organic_Detergents", new Item(false, "Vanish", 128, 230, 50));
             
-            //Console.WriteLine(SilpoExample.Print(0));
-            //Console.WriteLine(new string('-', 100));
             return SilpoExample;
         }
 
         public static Item GenerateATB()
         {
-            //Console.WriteLine("Hello, World! ATB");
             Item ATBExample = new Item(true, "ATB");
 
             string custom_path = "Household/Detergents/Organic_Detergents";
@@ -54,8 +50,7 @@ namespace exercise_2
 
             ATBExample.SetItemInDepart("Synthetic_Detergents", new Item(false, "Vanish_synthetic", 128, 230, 50));
             ATBExample.SetItemInDepart("Organic_Detergents", new Item(false, "Vanish", 128, 230, 50));
-            //Console.WriteLine(ATBExample.Print(0));
-            //Console.WriteLine(new string('-', 100));
+
             return ATBExample;
         }
     }

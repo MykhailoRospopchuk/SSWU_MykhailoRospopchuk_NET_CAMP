@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace exercise_4
-{
+{// Ще б якщо було неявне приведення до типу тензоа масивів і числа, було б ідеально.
     internal class Tensor
     {
         private int[] _indexes;

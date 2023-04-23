@@ -28,6 +28,7 @@ namespace exercise_3
             _measurements_date_month_2 = in_value_month_2 == 0 ? new DateTime() : measur_date_month_2;
             _measurements_date_month_3 = in_value_month_3 == 0 ? new DateTime() : measur_date_month_3;
         }
+        //А якщо прийде null, або не буде потрібної кількості в масиві?
         public EnergyRecord(string[] input)
         {
             _apart_number = Convert.ToInt32(input[0]);

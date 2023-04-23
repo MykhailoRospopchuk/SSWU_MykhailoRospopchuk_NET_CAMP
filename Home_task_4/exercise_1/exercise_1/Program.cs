@@ -3,7 +3,8 @@
 namespace exercise_1
 {
     internal class Program
-    {
+    {// Кінцевий результат не довершений. Програма мала повертати не позицію дужок, а речення, в яких були дужки...
+        // А текст - розкішний.)
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;

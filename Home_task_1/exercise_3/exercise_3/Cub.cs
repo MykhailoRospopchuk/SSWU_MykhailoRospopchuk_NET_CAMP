@@ -1,6 +1,7 @@
 ﻿//This class is designed to work with 3D arrays.
 //Implementation of the search for horizontal, vertical and diagonal ways in Cub
-
+// З назвами зрозуміліше, але менш ефективно. 
+// Але в цілому алгорим продуманий і з уникненням повторів. Просто можна трішки лаконічніше...
 namespace exercise_3
 {
     internal class Cub: EdgeCub

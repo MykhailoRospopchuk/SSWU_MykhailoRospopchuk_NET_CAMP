@@ -1,7 +1,7 @@
 ﻿using ScottPlot;
 
 namespace exercise_1
-{
+{//Mykhailo	Rospopchuk			95	19	19	90	85	99	100	112,8. Вітаю Вас в 2 турі.
     internal class Program
     {
         static void Main(string[] args)

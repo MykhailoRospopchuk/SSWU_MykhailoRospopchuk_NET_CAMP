@@ -3,7 +3,7 @@
 using System.Text.RegularExpressions;
 
 namespace exercise_2
-{
+{// чудово, що здійснили порівняння!!!
     internal static class EmailValidator
     {
         //Selects all possible candidates from the proposed text for validation
@@ -46,7 +46,7 @@ namespace exercise_2
             int index_et = email.LastIndexOf('@');
             string domain = email.Substring(index_et + 1);
             string local = email.Substring(0, index_et);
-
+            // Можна множиною...
             string valid_chars_local = "!#$%&'*+-/=?^_`{|}~.()";
             string valid_chars_domain = "-.()";
 

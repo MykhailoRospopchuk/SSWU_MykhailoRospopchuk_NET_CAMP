@@ -85,6 +85,11 @@ namespace exercise_1
             }
         }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         public override string? ToString()
         {
             StringBuilder result_str = new StringBuilder();

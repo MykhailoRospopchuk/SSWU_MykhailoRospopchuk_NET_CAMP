@@ -1,6 +1,6 @@
 ﻿//The second option for solving the problem
 
-//In this class, the execution of the task is organized by writing the complete collection to memory.
+//In this class, the execution of the task is organized by writing copy the complete collection to memory.
 //After which it is sorted and an array with sorted elements is returned
 
 using System.Collections;
@@ -74,7 +74,7 @@ namespace exercise_2
         public override string? ToString()
         {
             StringBuilder result_str = new StringBuilder();
-            result_str.AppendLine("Income arrays from GreatArrayMemory:");
+            result_str.AppendLine("Income arrays in GreatArrayMemory:");
             foreach (var item in _income_arrays)
             {
                 foreach (var temp in item)

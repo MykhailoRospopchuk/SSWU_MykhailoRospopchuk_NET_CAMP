@@ -7,14 +7,15 @@ namespace exercise_1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            int[,] mat = { 
-                { 1, 2, 3, 4 },
-                { 5, 6, 7, 8 },
-                { 9, 10, 11, 12 },
-                { 13, 14, 15, 16 }
+            int[,] mat = {
+                { 1, 2, 3, 4},
+                { 5, 6, 7, 8},
+                { 9, 10, 11, 12},
+                { 13, 14, 15, 16}
             };
 
-            
+
+
 
             MatrixEnumerator matrix = new MatrixEnumerator(mat);
             Console.WriteLine(matrix.ToString());

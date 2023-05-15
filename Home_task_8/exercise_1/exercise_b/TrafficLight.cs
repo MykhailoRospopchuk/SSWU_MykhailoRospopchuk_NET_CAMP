@@ -30,7 +30,7 @@ namespace exercise_b
         //in accordance with the change of the state of the subject.
         //In the case of creating new types of observer,
         //the Update method will be refactored according to the mechanism of operation of the new type.
-        public async Task Update(int value, int yellow_duration_second)
+        public async Task UpdateAsync(int value, int yellow_duration_second)
         {
             if (value != _state)
             {

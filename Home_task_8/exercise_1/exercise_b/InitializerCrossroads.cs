@@ -145,7 +145,7 @@ namespace exercise_b
 
             //Initialize the data collector 
             DataColector collector = new DataColector();
-            collector.SetCrosroads(crossroads);
+            collector.SetCrosRoads(crossroads);
 
             //Start a separate thread for the collector
             Thread ThreadCollertor = new Thread(collector.Collector);

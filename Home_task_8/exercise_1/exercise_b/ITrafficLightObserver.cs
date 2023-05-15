@@ -11,7 +11,7 @@ namespace exercise_b
         }
         // Receive update from subject
         // Using the Update method, the status of the traffic light is updated according to the received value of the subject's state
-        Task Update(int value, int second);
+        Task UpdateAsync(int value, int second);
 
         object GetState();
 

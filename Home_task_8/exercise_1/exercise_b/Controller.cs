@@ -47,7 +47,7 @@ namespace exercise_b
         {
             for (int i = 0; i < income_arr.Length; i++)
             {
-                _traffic_lights[i].Update(income_arr[i], yellow_Period);
+                _traffic_lights[i].UpdateAsync(income_arr[i], yellow_Period);
             }
         }
 

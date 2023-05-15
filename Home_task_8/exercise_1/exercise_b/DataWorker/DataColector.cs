@@ -16,7 +16,7 @@ namespace exercise_b.DataWorker
             _shouldStop = true;
         }
 
-        public void SetCrosroads(List<List<ITrafficLightObserver>> crossroads)
+        public void SetCrosRoads(List<List<ITrafficLightObserver>> crossroads)
         {
             _crossroads = crossroads;
         }

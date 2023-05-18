@@ -6,7 +6,7 @@
       <HashCode>AAAAAAAAAAQFggIAAABAAEAAAAAAAAJgAAAAAAAAAAA=</HashCode>
       <FileName>Controller.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="exercise_b.InitializerCrossroads">
     <Position X="4.75" Y="0.5" Width="1.5" />
@@ -28,7 +28,7 @@
       <HashCode>AAAAAEAAAAAAgAQEAABACAQAAAAAAAgAAQAAAABAABA=</HashCode>
       <FileName>TrafficLight.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.109" />
   </Class>
   <Class Name="exercise_b.TrafficPeriod" BaseTypeListCollapsed="true">
     <Position X="4.75" Y="4.5" Width="2.25" />
@@ -36,7 +36,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAEAQAAAAAAQAAAAAABM=</HashCode>
       <FileName>TrafficPeriod.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="exercise_b.Validator">
     <Position X="7.25" Y="4.5" Width="1.5" />
@@ -69,7 +69,7 @@
   <Class Name="exercise_b.DataWorker.DataColector">
     <Position X="9.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAkAgAAAAAAAAAAAACAAAAAAAABAAQAAAA=</HashCode>
+      <HashCode>AAAACAAAAAAEAgAAAAAAAAAAAACAAAAAAAABAAQAAAA=</HashCode>
       <FileName>DataWorker\DataColector.cs</FileName>
     </TypeIdentifier>
   </Class>

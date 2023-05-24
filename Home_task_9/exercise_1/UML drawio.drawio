@@ -1,0 +1,319 @@
+<mxfile host="app.diagrams.net" modified="2023-05-24T00:09:36.085Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="K4h3nofHTWZzh1FhIG3o" version="21.3.2" type="google">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="2339" pageHeight="3300" background="none" math="0" shadow="1">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;ICook&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ SetNext(ICook): ICook&lt;br&gt;+ OrderHandler(object): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="3662" y="129" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;ICookHandler&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookType: DishesType&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="4276.5" y="1144" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IClonable&amp;lt;T&amp;gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Clone(): T&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2406" y="1140" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;IDishes&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;Id: Guid&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookingTime: int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;NameDishes: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookingCount: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;DishesType: DishesType&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookingState: DishesState&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2391" y="1540" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&lt;b&gt;IOrder&lt;/b&gt;&lt;/i&gt;&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;Id: Guid&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetAllDishes(): List&amp;lt;BaseDishes&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetNotStartedDishes(DishesType): List&amp;lt;BaseDishes&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetReadyDishes(): List&amp;lt;BaseDishes&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetWaitDishes(): List&amp;lt;BaseDishes&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ IsFinishDishesByType(DishesType): bool&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ IsOrderFinish(): bool&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ SetDishes(List&amp;lt;BaseDishes&amp;gt;): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ UpdateStatus(Guid, DishesState): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2822" y="2033" width="310" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;&amp;lt;&amp;lt;&lt;/b&gt;ienumeration&lt;b&gt;&amp;gt;&amp;gt;&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;DishesState&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Wait = 0&lt;br&gt;InProgres = 1&lt;br&gt;Finish = 2&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2897" y="1165" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;&amp;lt;&amp;lt;&lt;/b&gt;ienumeration&lt;b&gt;&amp;gt;&amp;gt;&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;text-decoration:underline;&quot;&gt;&lt;b&gt;DishesType&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;Pizza = 0&lt;br&gt;Drinks = 1&lt;br&gt;Desserts = 2&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2660" y="1125" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-8" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 4px;&quot;&gt;&lt;b&gt;BaseCook&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _nextHandler: ICook&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;virtual&amp;gt;&amp;gt;OrderHandle(object): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ SetNext(ICook): ICook&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="3637" y="279" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-9" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 4px;&quot;&gt;&lt;b&gt;CookPizzaHandler&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _cook: List&amp;lt;OneCook&amp;gt;&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _cook_type: DishesType&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _request: object&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookType: DishesType&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;CookPizzaHandler(DishesType, List&amp;lt;OneCook&amp;gt;)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;override&amp;gt;&amp;gt;OrderHandle(object): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- GivNewDishCook(OneCook): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- CallNextHandler(object): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- SubscribeCook(): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="4016.5" y="744" width="420" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=block;endFill=0;endSize=12;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-10" target="ULNiyg_yGTb0vzLvEe8x-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-10" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 4px;&quot;&gt;&lt;b&gt;CookDrinkHandler&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _cook: List&amp;lt;OneCook&amp;gt;&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _cook_type: DishesType&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _request: object&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookType: DishesType&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;CookPizzaHandler(DishesType, List&amp;lt;OneCook&amp;gt;)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;override&amp;gt;&amp;gt;OrderHandle(object): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- GivNewDishCook(OneCook): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- CallNextHandler(object): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- SubscribeCook(): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="3546.5" y="744" width="420" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-11" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 4px;&quot;&gt;&lt;b&gt;CookDessertHandler&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _cook: List&amp;lt;OneCook&amp;gt;&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _cook_type: DishesType&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _request: object&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookType: DishesType&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;CookPizzaHandler(DishesType, List&amp;lt;OneCook&amp;gt;)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;override&amp;gt;&amp;gt;OrderHandle(object): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- GivNewDishCook(OneCook): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- CallNextHandler(object): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- SubscribeCook(): void&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;&amp;lt;&amp;lt;Event&amp;gt;&amp;gt; AskOrder:&amp;nbsp; AskNewOrderDelegate(): void&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;div&gt;&lt;u style=&quot;border-color: var(--border-color);&quot;&gt;&lt;br&gt;&lt;/u&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="3076.5" y="744" width="420" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-13" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 4px;&quot;&gt;&lt;b&gt;BaseDishes&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _cooking_time: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _count: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _dish_state: DishesState&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _dish_type: DishesType&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _id: Guid&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _name: string&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookingCount: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get; set&amp;gt;&amp;gt;CookingState: DishesState&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;CookingTime: int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;DishesType:&amp;nbsp;DishesType&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;Id: Guid&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;NameDishes: string&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;BaseDishes(int, string, int, DishesType)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Clone(): BaseDishes&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;&amp;lt;&amp;lt;override&amp;gt;&amp;gt;ToString(): string?&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2767" y="1393" width="420" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-14" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Order&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _dishes: List&amp;lt;BaseDishes&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _id: Guid&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;get&amp;gt;&amp;gt;Id: Guid&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetAllDishes(): List&amp;lt;BaseDishes&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetNotStartedDishes(DishesType): List&amp;lt;BaseDishes&amp;gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetReadyDishes(): List&amp;lt;BaseDishes&amp;gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GetWaitDishes(): List&amp;lt;BaseDishes&amp;gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ IsFinishDishesByType(DishesType): bool&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ IsOrderFinish(): bool&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ SetDishes(List&amp;lt;BaseDishes&amp;gt;): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ UpdateStatus(Guid, DishesState): void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;+&amp;nbsp;&amp;lt;&amp;lt;override&amp;gt;&amp;gt;ToString(): string?&lt;/p&gt;&lt;p style=&quot;border-color: var(--border-color); margin: 0px 0px 0px 4px;&quot;&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2812" y="1737" width="330" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-15" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;OrderGenerator&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _dishes_desserts: List&amp;lt;string&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _dishes_drinks: List&amp;lt;string&amp;gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _dishes_pizza: List&amp;lt;string&amp;gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _rnd: Random&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _stop: bool&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ GenerateOrder(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ RequestStop(bool): void&lt;/p&gt;&lt;hr&gt;&amp;nbsp;+&amp;nbsp;&amp;lt;&amp;lt;Event&amp;gt;&amp;gt; OrderNotify:&amp;nbsp; OrderGeneratorDelegate(IOrder): void" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="3306" y="1563" width="380" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-16" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Manager&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _active_orders: List&amp;lt;IOrder&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _is_empty: bool&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _order_handler: ICook&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- CheckOrders(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-&amp;nbsp;CountCurrentActive(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;SetChain(ICook): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;SetOrders(IOrder): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;StartCooking(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="3776" y="1563" width="370" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-17" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;&lt;u&gt;View&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- &lt;u&gt;_st: Stopwatch&lt;/u&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt; View()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &lt;u&gt;PrintWithOutTime(string): void&lt;/u&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &lt;u&gt;PrintWithTime(string): void&lt;/u&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="4206" y="1563" width="330" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-18" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Program&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &lt;u&gt;Main(string[]): void&lt;/u&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="3881" y="1333" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-19" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center; margin: 0px 0px 0px 4px;&quot;&gt;&lt;b&gt;OneCook&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- _name: string&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;OneCook(string)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ MakeDish(IDishes): Task&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Clone(): OneCook&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;&amp;lt;&amp;lt;override&amp;gt;&amp;gt;ToString(): string?&lt;br&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;&amp;lt;&amp;lt;Event&amp;gt;&amp;gt; AskDish:&amp;nbsp; AskNewDishDelegate(OneCook): void&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;div&gt;&lt;u style=&quot;border-color: var(--border-color);&quot;&gt;&lt;br&gt;&lt;/u&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2633.5" y="744" width="340" height="152" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-20" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-9" target="ULNiyg_yGTb0vzLvEe8x-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="4226.5" y="684" as="sourcePoint" />
+            <mxPoint x="4386.5" y="684" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="4506.5" y="834" />
+              <mxPoint x="4506.5" y="1179" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-21" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-11" target="ULNiyg_yGTb0vzLvEe8x-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3296.5" y="684" as="sourcePoint" />
+            <mxPoint x="3946.5" y="534" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-22" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-10" target="ULNiyg_yGTb0vzLvEe8x-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3546.5" y="664" as="sourcePoint" />
+            <mxPoint x="3706.5" y="664" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;endArrow=block;endFill=0;endSize=12;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-9" target="ULNiyg_yGTb0vzLvEe8x-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4156.5" y="704" as="sourcePoint" />
+            <mxPoint x="4156.5" y="404" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="4227" y="492" />
+              <mxPoint x="3817" y="492" />
+              <mxPoint x="3817" y="378" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;endArrow=block;endFill=0;endSize=12;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-11" target="ULNiyg_yGTb0vzLvEe8x-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3586.5" y="754" as="sourcePoint" />
+            <mxPoint x="3586.5" y="454" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3287" y="488" />
+              <mxPoint x="3697" y="488" />
+              <mxPoint x="3697" y="378" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-28" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.993;exitY=0.68;exitDx=0;exitDy=0;exitPerimeter=0;edgeStyle=orthogonalEdgeStyle;entryX=0.998;entryY=0.359;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-8" target="ULNiyg_yGTb0vzLvEe8x-8">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3897" y="249" as="sourcePoint" />
+            <mxPoint x="3947" y="239" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3937" y="347" />
+              <mxPoint x="3937" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-29" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-8" target="ULNiyg_yGTb0vzLvEe8x-0">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3517" y="229" as="sourcePoint" />
+            <mxPoint x="3677" y="229" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-30" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-14" target="ULNiyg_yGTb0vzLvEe8x-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2902" y="1710" as="sourcePoint" />
+            <mxPoint x="3062" y="1710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-31" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=0.002;exitY=0.343;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;exitPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-13" target="ULNiyg_yGTb0vzLvEe8x-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2747" y="1345" as="sourcePoint" />
+            <mxPoint x="2907" y="1345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-32" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-13" target="ULNiyg_yGTb0vzLvEe8x-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2837" y="1285" as="sourcePoint" />
+            <mxPoint x="2997" y="1285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-33" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-18" target="ULNiyg_yGTb0vzLvEe8x-16">
+          <mxGeometry x="-0.7778" y="10" relative="1" as="geometry">
+            <mxPoint x="3836" y="1483" as="sourcePoint" />
+            <mxPoint x="3996" y="1483" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-34" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-18" target="ULNiyg_yGTb0vzLvEe8x-15">
+          <mxGeometry x="-0.9372" y="-22" relative="1" as="geometry">
+            <mxPoint x="3666" y="1433" as="sourcePoint" />
+            <mxPoint x="3826" y="1433" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-35" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-18" target="ULNiyg_yGTb0vzLvEe8x-17">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="4136" y="1393" as="sourcePoint" />
+            <mxPoint x="4296" y="1393" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-37" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-18" target="ULNiyg_yGTb0vzLvEe8x-11">
+          <mxGeometry x="-0.9929" y="-12" relative="1" as="geometry">
+            <mxPoint x="3436.5" y="1364" as="sourcePoint" />
+            <mxPoint x="3596.5" y="1364" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3921" y="1304" />
+              <mxPoint x="3287" y="1304" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-39" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-18" target="ULNiyg_yGTb0vzLvEe8x-10">
+          <mxGeometry x="-0.9917" y="-9" relative="1" as="geometry">
+            <mxPoint x="3616.5" y="1234" as="sourcePoint" />
+            <mxPoint x="3776.5" y="1234" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3961" y="1249" />
+              <mxPoint x="3757" y="1249" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-40" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-18" target="ULNiyg_yGTb0vzLvEe8x-9">
+          <mxGeometry x="-0.9904" y="-8" relative="1" as="geometry">
+            <mxPoint x="4016.5" y="1364" as="sourcePoint" />
+            <mxPoint x="4126.5" y="954" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="4001" y="1248" />
+              <mxPoint x="4227" y="1248" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-41" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-11" target="ULNiyg_yGTb0vzLvEe8x-19">
+          <mxGeometry x="-0.9751" y="-20" relative="1" as="geometry">
+            <mxPoint x="2676.5" y="1124" as="sourcePoint" />
+            <mxPoint x="3036.5" y="1324" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3181.5" y="664" />
+              <mxPoint x="2888.5" y="664" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-43" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-10" target="ULNiyg_yGTb0vzLvEe8x-19">
+          <mxGeometry x="-0.9819" y="-14" relative="1" as="geometry">
+            <mxPoint x="3316.5" y="744" as="sourcePoint" />
+            <mxPoint x="2946.5" y="1314" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3651.5" y="614" />
+              <mxPoint x="2803.5" y="614" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-44" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-9" target="ULNiyg_yGTb0vzLvEe8x-19">
+          <mxGeometry x="-0.9874" y="-15" relative="1" as="geometry">
+            <mxPoint x="3486.5" y="644" as="sourcePoint" />
+            <mxPoint x="3646.5" y="644" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="4121.5" y="554" />
+              <mxPoint x="2718.5" y="554" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-46" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-15" target="ULNiyg_yGTb0vzLvEe8x-14">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="2995" y="2144" as="sourcePoint" />
+            <mxPoint x="3155" y="2144" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3496" y="1847" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-47" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-14" target="ULNiyg_yGTb0vzLvEe8x-13">
+          <mxGeometry x="-0.922" y="-22" relative="1" as="geometry">
+            <mxPoint x="2979" y="1813" as="sourcePoint" />
+            <mxPoint x="3139" y="1813" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-48" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-16" target="ULNiyg_yGTb0vzLvEe8x-4">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="3854" y="1937" as="sourcePoint" />
+            <mxPoint x="4014" y="1937" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-49" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=8 8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-13" target="ULNiyg_yGTb0vzLvEe8x-6">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2177" y="933" as="sourcePoint" />
+            <mxPoint x="2337" y="933" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-51" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=8 8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-13" target="ULNiyg_yGTb0vzLvEe8x-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2758" y="1559" as="sourcePoint" />
+            <mxPoint x="2763" y="1427" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="2872" y="1295" />
+              <mxPoint x="2740" y="1295" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-55" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=8 8;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-9" target="ULNiyg_yGTb0vzLvEe8x-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3929.5" y="1114" as="sourcePoint" />
+            <mxPoint x="2609.5" y="1284" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="4121" y="1091" />
+              <mxPoint x="2780" y="1091" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-56" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=8 8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-10" target="ULNiyg_yGTb0vzLvEe8x-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3273.5" y="1051" as="sourcePoint" />
+            <mxPoint x="2692.5" y="1245" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3651" y="1065" />
+              <mxPoint x="2740" y="1065" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-58" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;dashPattern=8 8;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-11" target="ULNiyg_yGTb0vzLvEe8x-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2517.5" y="824" as="sourcePoint" />
+            <mxPoint x="2552.5" y="1284" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3181" y="1039" />
+              <mxPoint x="2700" y="1039" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-59" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-16" target="ULNiyg_yGTb0vzLvEe8x-0">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="4221.5" y="2146" as="sourcePoint" />
+            <mxPoint x="4381.5" y="2146" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="4050" y="1979" />
+              <mxPoint x="4617" y="1979" />
+              <mxPoint x="4617" y="169" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-60" value="Pizza" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2367" y="97" width="2295" height="2167" as="geometry" />
+        </mxCell>
+        <mxCell id="ULNiyg_yGTb0vzLvEe8x-61" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ULNiyg_yGTb0vzLvEe8x-19" target="ULNiyg_yGTb0vzLvEe8x-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="2504" y="934" as="sourcePoint" />
+            <mxPoint x="2664" y="934" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

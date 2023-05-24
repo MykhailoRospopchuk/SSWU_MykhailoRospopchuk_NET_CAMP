@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="exercise_1.BaseCook">
+    <Position X="6" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>BaseCook.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="exercise_1.BaseDishes" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="5.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAACISAAAAACAEAEAABAAgAAAABAAAAAAACAAAIAABE=</HashCode>
+      <FileName>BaseDishes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="exercise_1.CookDessertsHandler">
+    <Position X="0.5" Y="5" Width="4.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="exercise_1.CookDessertsHandler.AskNewOrderDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CookDessertsHandler.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAIAAQAEAAAAAAAAUAAAAAAAAAAQAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>CookDessertsHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="exercise_1.CookDrinkHandler">
+    <Position X="6" Y="5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>QAIAAQAEAAAAAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>CookDrinkHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="exercise_1.CookPizzaHandler">
+    <Position X="11" Y="5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>QAIAAQAEAAAAAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>CookPizzaHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="exercise_1.Manager">
+    <Position X="28" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAACBAAACAAAAAAEAAAAAQAAAAAABAAEAAAAA=</HashCode>
+      <FileName>Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="exercise_1.OneCook">
+    <Position X="5.75" Y="10.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="exercise_1.OneCook.AskNewDishDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>OneCook.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAgAABA=</HashCode>
+      <FileName>OneCook.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="exercise_1.Order" BaseTypeListCollapsed="true">
+    <Position X="20" Y="5.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAEQBAAAABEAABAAACBAAAAAAABAAAACAAAAAA=</HashCode>
+      <FileName>Order.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="exercise_1.OrderGenerator">
+    <Position X="25" Y="5.75" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="exercise_1.OrderGenerator.OrderGeneratorDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>OrderGenerator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAMABAAAgACAgAAAAAAAABABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OrderGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="exercise_1.Program">
+    <Position X="10.75" Y="10.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="exercise_1.View">
+    <Position X="15.75" Y="11.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAgAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="exercise_1.IClonable&lt;T&gt;">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>IClonable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="exercise_1.ICook">
+    <Position X="6" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICook.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="exercise_1.ICooKHandler">
+    <Position X="10.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICooKHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="exercise_1.IDishes">
+    <Position X="15.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAACAEAAAAAAAAAAAAAAAAAAAAAAAAIAAAE=</HashCode>
+      <FileName>IDishes.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="exercise_1.IOrder">
+    <Position X="19" Y="0.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEQBAAAABAAAAAAACBAAAAAAABAAAACAAAAAA=</HashCode>
+      <FileName>IOrder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="exercise_1.DishesState">
+    <Position X="23.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAIAAAAAAAAg=</HashCode>
+      <FileName>DishEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="exercise_1.DishesType">
+    <Position X="25.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>DishEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

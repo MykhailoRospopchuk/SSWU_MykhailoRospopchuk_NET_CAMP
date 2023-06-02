@@ -16,7 +16,7 @@ namespace exercise_1
                 bool matches = Regex.IsMatch(income, pattern_card);
                 if (!matches)
                 {
-                    throw new FormatException("\nEnter the Card information according to the template");
+                    throw new FormatException($"\nEnter the Card information according to the template. The card was not registered: /...{income}.../");
                 }
 
                 CheckEmptySplit(income);
@@ -24,7 +24,7 @@ namespace exercise_1
             catch (FormatException ex)
             {
                 result = false;
-                Console.WriteLine(ex.Message);
+                View.PrintExceptionMessage(ex.Message);
             }
 
             return result;
@@ -50,7 +50,7 @@ namespace exercise_1
             catch (FormatException ex)
             {
                 result = false;
-                Console.WriteLine(ex.Message);
+                View.PrintExceptionMessage(ex.Message);
             }
 
             return result;

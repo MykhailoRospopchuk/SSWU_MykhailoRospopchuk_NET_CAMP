@@ -8,7 +8,7 @@ namespace exercise_1
         {
             if (!InputValidator.ValidateCardInput(income_card))
             {
-                throw new FormatException("Input Card not pass validation\n");
+                return null;
             }
             string[] splited_bank = income_card.Split('#', StringSplitOptions.RemoveEmptyEntries);
 

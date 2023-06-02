@@ -1,6 +1,4 @@
 ﻿
-using System.Threading.Channels;
-
 namespace exercise_1
 {
     internal class TerminalOfValidation
@@ -83,7 +81,16 @@ namespace exercise_1
             {
                 List<string> list = DB.GetAllLine(DB.PathData._card_income_path);
                 List<ICard> cards = new List<ICard>();
-                list.ForEach(x => cards.Add(CardParser.Parse(x)));
+
+                list.ForEach(x => {
+                    ICard current = CardParser.Parse(x);
+                    if (current != null)
+                    {
+                        cards.Add(CardParser.Parse(x));
+                    }
+                    
+                });
+
                 cards.ForEach(card => validator_handler.Handle(card));
                 View.PrintAllCard(cards);
             }
@@ -91,7 +98,7 @@ namespace exercise_1
             {
                 Console.WriteLine(ex.Message);
             }
-}
+        }
 
         public void ValidateCardFromConsole()
         {
@@ -137,6 +144,6 @@ namespace exercise_1
             {
                 Console.WriteLine(ex.Message);
             }
-}
+        }
     }
 }

@@ -1,3 +1,7 @@
 # American Express # card_number = "378282246310005"
 # MasterCard # card_number = "5555555555554444"
 # MasterCard # card_number = "5555512369854444"
+# MasterCard # card_number = "5555512369854444"s
+# American Express # card_number = "378612342310006"
+# MasterCard # card_number = "5855512369854442"
+# 111American Express # card_number = "378612342310006"

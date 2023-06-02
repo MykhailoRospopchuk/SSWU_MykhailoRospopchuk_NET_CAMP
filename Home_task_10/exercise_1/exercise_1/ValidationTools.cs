@@ -25,21 +25,22 @@ namespace exercise_1
 
         public static bool CheckCardRule(string card_brand, string card_number)
         {
-            bool mark = false;
+            bool mark_length = false;
+            bool mark_prefix = false;
             Bank current_bank = BankBrands.GetBankByBrand(card_brand);
             Rule current_rule = current_bank.BankRule;
 
             foreach (var item in current_rule.Length)
             {
-                if (item == card_number.Length) mark = true;
+                if (item == card_number.Length) mark_length = true;
             }
 
             foreach (var item in current_rule.Prefix)
             {
-                if (card_number.StartsWith(item)) mark = true;
+                if (card_number.StartsWith(item)) mark_prefix = true;
             }
 
-            return mark;
+            return mark_length && mark_prefix;
         }
 
         public static bool CheckCardBrand(string card_brand)

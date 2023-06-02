@@ -22,6 +22,10 @@ namespace exercise_1
 
         private static string CardToString(ICard card)
         {
+            if (card == null)
+            {
+                return "Card not created. Input error";
+            }
             return $"Bank Brand: {card.CreditCardBrand,-20} Card Number: {card.CreditCardNumber,-20} Valid: {card.IsValid}";
         }
 
@@ -54,6 +58,13 @@ namespace exercise_1
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Error in module {message} - Bank Brand: {card.CreditCardBrand,-20} Card Number: {card.CreditCardNumber,-20}");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static void PrintExceptionMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

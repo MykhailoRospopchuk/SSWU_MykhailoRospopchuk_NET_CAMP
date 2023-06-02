@@ -9,7 +9,7 @@ namespace exercise_1
             public readonly static string _card_income_path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName, $"card_income.txt");
         }
 
-        public static void InitDB()
+        static DB()
         {
             if (!File.Exists(PathData._bank_brand_path))
             {

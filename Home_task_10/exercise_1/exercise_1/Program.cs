@@ -7,8 +7,6 @@ namespace exercise_1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-
-            DB.InitDB();
             
             AbstractHandler exist_handler = new ExistsBrandBankHandler();
             AbstractHandler luna_handler = new LunaHandler();

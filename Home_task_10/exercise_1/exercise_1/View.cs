@@ -7,6 +7,7 @@ namespace exercise_1
         public static void PrintAllCard(List<ICard> cards)
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append("\n");
             foreach (var card in cards)
             {
                 sb.Append(CardToString(card));
@@ -47,6 +48,13 @@ namespace exercise_1
             rule.Prefix.ForEach(x => sb.Append($" {x,4};"));
 
             return sb.ToString();
+        }
+
+        public static void PrintErrorPoint(string message, ICard card)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Error in module {message} - Bank Brand: {card.CreditCardBrand,-20} Card Number: {card.CreditCardNumber,-20}");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

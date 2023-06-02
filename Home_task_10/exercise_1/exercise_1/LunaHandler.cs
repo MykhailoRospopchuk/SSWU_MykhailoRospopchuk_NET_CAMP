@@ -12,6 +12,7 @@ namespace exercise_1
             }
             else
             {
+                View.PrintErrorPoint(this.GetType().Name, request);
                 request.IsValid = false;
                 return request;
             }

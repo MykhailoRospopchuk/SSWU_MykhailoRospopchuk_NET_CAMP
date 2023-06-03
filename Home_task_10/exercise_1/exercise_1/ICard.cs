@@ -1,4 +1,5 @@
-﻿namespace exercise_1
+﻿//Credit card interface
+namespace exercise_1
 {
     public interface ICard
     {

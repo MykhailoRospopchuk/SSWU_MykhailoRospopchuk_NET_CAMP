@@ -1,15 +1,16 @@
-﻿
+﻿//This class performs the function of interaction with the user.
+//Organizes the execution of functions called by the user
 namespace exercise_1
 {
     internal class TerminalOfValidation
     {
-        private AbstractHandler validator_handler;
+        private readonly AbstractHandler validator_handler;
 
         private string[] _options = {
             "1 - Validate Card From File",
             "2 - Validate Card From Console",
-            "3 - Add Bank Brand",
-            "4 - Show All Banks",
+            "3 - Add Card Brand",
+            "4 - Show All Brands",
             "9 - Exit"
         };
 
@@ -75,6 +76,10 @@ namespace exercise_1
             }
         }
 
+        //Verification of credit cards found in a text file
+        //And displays in the console a list of all cards that passed and did not pass validation
+        //If the information about the card is entered in an incorrect format
+        //Message will be displayed and the card will be skipped
         public void ValidateCardFromFile()
         {
             try
@@ -100,17 +105,24 @@ namespace exercise_1
             }
         }
 
+        //Validation of credit card information entered by the user from the console
+        //If the information about the card is entered in an incorrect format
+        //Message will be displayed and the card will be skipped
         public void ValidateCardFromConsole()
         {
             try
             {
-                Console.WriteLine("Enter Card data in format <<# BANK BRAND # card_number = \"CARD NUMBER\">>");
+                Console.WriteLine("Enter Card data in format <<# CARD BRAND # card_number = \"CARD NUMBER\">>");
                 string input_card = Console.ReadLine();
 
                 ICard current_card = CardParser.Parse(input_card);
-                validator_handler.Handle(current_card);
+                if (current_card != null)
+                {
+                    validator_handler.Handle(current_card);
 
-                View.PrintCard(current_card);
+                    View.PrintCard(current_card);
+                }
+                
             }
             catch (FormatException ex)
             {
@@ -118,14 +130,17 @@ namespace exercise_1
             }
         }
 
+        //Add a new card brand to the list of registered ones
+        //If the brand information is entered incorrectly, a message will be displayed.
+        //If the entered brand already exists, a message will be displayed and the brand will not be added
         public void AddBankBrand()
         {
             try
             {
-                Console.WriteLine("Enter Bank data in format <<#BANK BRAND#CREDIT CARD NUMBER LENGTH#IDENTIFICATION NUMBER PREFIX>>");
-                string input_bank = Console.ReadLine();
-                Bank current_bank = BankParser.Parse(input_bank);
-                BankBrands.AddBrand(current_bank);
+                Console.WriteLine("Enter Bank data in format <<#CARD BRAND#CREDIT CARD NUMBER LENGTH#IDENTIFICATION NUMBER PREFIX>>");
+                string input_brand = Console.ReadLine();
+                Brand current_bank = BrandParser.Parse(input_brand);
+                CardBrands.AddBrand(current_bank);
             }
             catch (FormatException ex)
             {
@@ -133,11 +148,12 @@ namespace exercise_1
             }
         }
 
+        //Show a list of all registered card brands
         public void ShowAllBank()
         {
             try
             {
-                List<Bank> result = BankBrands.GetBank();
+                List<Brand> result = CardBrands.GetBank();
                 View.PrintAllBank(result);
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
-﻿namespace exercise_1
+﻿//Simulates the essence of a credit card. Stores card brand and number
+namespace exercise_1
 {
     public class Card : ICard
     {

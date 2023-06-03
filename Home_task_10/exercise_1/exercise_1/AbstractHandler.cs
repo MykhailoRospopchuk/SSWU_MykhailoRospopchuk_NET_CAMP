@@ -1,4 +1,4 @@
-﻿
+﻿// The default chaining behavior
 namespace exercise_1
 {
     internal abstract class AbstractHandler : IHandler

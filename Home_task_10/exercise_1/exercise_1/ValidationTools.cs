@@ -1,4 +1,9 @@
-﻿
+﻿//The static class implements three verification mechanisms:
+//  - LunaCheckCard - Verification of the Luna algorithm;
+//  - CheckCardRule - Check for compliance with the conditions for the current type of card brand;
+//  - CheckCardBrand - Checking whether the specified card brand exists in the list of registered ones.
+
+// It is used in every link of the chain of responsibility
 namespace exercise_1
 {
     internal static class ValidationTools
@@ -27,8 +32,8 @@ namespace exercise_1
         {
             bool mark_length = false;
             bool mark_prefix = false;
-            Bank current_bank = BankBrands.GetBankByBrand(card_brand);
-            Rule current_rule = current_bank.BankRule;
+            Brand current_bank = CardBrands.GetBrandByName(card_brand);
+            Rule current_rule = current_bank.BrandRule;
 
             foreach (var item in current_rule.Length)
             {
@@ -45,7 +50,7 @@ namespace exercise_1
 
         public static bool CheckCardBrand(string card_brand)
         {
-            return BankBrands.CheckBrand(card_brand);
+            return CardBrands.CheckBrand(card_brand);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿
+using System.Text;
 
+//It is used to output information to the console
 namespace exercise_1
 {
     internal static class View
@@ -26,10 +28,10 @@ namespace exercise_1
             {
                 return "Card not created. Input error";
             }
-            return $"Bank Brand: {card.CreditCardBrand,-20} Card Number: {card.CreditCardNumber,-20} Valid: {card.IsValid}";
+            return $"Card Brand: {card.CreditCardBrand,-20} Card Number: {card.CreditCardNumber,-20} Valid: {card.IsValid}";
         }
 
-        public static void PrintAllBank(List<Bank> banks)
+        public static void PrintAllBank(List<Brand> banks)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var bank in banks)
@@ -40,15 +42,15 @@ namespace exercise_1
             Console.WriteLine(sb.ToString());
         }
 
-        private static string BankToString(Bank bank)
+        private static string BankToString(Brand bank)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"Bank Brand: {bank.BankName, -20}");
+            sb.Append($"Card Brand: {bank.BrandName, -20}");
             sb.Append("\n\tCredit card number length: ");
-            Rule rule = bank.BankRule;
+            Rule rule = bank.BrandRule;
             rule.Length.ForEach(x => sb.Append($" {x,2};"));
-            sb.Append("\n\tBank number prefix:      ");
+            sb.Append("\n\tBrand number prefix:      ");
             rule.Prefix.ForEach(x => sb.Append($" {x,4};"));
 
             return sb.ToString();
@@ -57,7 +59,7 @@ namespace exercise_1
         public static void PrintErrorPoint(string message, ICard card)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Error in module {message} - Bank Brand: {card.CreditCardBrand,-20} Card Number: {card.CreditCardNumber,-20}");
+            Console.WriteLine($"Error in module {message} - Card Brand: {card.CreditCardBrand,-20} Card Number: {card.CreditCardNumber,-20}");
             Console.ForegroundColor = ConsoleColor.White;
         }
 

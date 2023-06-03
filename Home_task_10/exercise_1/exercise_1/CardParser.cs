@@ -1,4 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿//Performs credit card parsing and returns an instance Card
+//Credit card information in the form is provided at the entrance
+// # American Express # card_number = "378282246310005" == # CARD BRAND # card_number = "CARD NUMBER"
+
+//Used to parse credit card information from both a text file and user input into the console
+using System.Text.RegularExpressions;
 
 namespace exercise_1
 {
@@ -6,6 +11,7 @@ namespace exercise_1
     {
         public static Card Parse(string income_card)
         {
+            //Call for validation of entered data
             if (!InputValidator.ValidateCardInput(income_card))
             {
                 return null;

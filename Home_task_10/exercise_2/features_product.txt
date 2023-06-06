@@ -1,0 +1,8 @@
+1;Perishes quickly;1,3;0
+2;Fragile;1,2;1,1
+3;No hard packaging;1,1;1,05
+4;In liquid form;1,25;1,5
+5;Oversized;1,35;1,1
+6;Transport in refrigerators;1,5;0
+7;Hazardous substances;1,65;0
+8;Inflammable;1,42;1,1

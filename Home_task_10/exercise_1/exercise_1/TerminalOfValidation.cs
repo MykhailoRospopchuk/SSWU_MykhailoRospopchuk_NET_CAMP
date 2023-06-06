@@ -91,7 +91,7 @@ namespace exercise_1
                     ICard current = CardParser.Parse(x);
                     if (current != null)
                     {
-                        cards.Add(CardParser.Parse(x));
+                        cards.Add(current);
                     }
                     
                 });

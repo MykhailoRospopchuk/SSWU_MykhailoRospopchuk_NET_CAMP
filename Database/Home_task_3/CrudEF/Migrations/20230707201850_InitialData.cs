@@ -1,9 +1,4 @@
-﻿using System;
-using CrudEF.Model;
-using Humanizer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -15,6 +10,18 @@ namespace CrudEF.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.Sql("""
+                EXEC sp_MSforeachtable @command1 =
+                'IF (SELECT COUNT(1) 
+                    FROM INFORMATION_SCHEMA.TABLES 
+                    WHERE TABLE_TYPE = ''BASE TABLE'' 
+                    AND ''[''+ TABLE_SCHEMA + ''].['' + TABLE_NAME + '']'' = ''?'' 
+                    AND OBJECTPROPERTY(OBJECT_ID(TABLE_NAME), ''TableHasIdentity'') = 1) > 0 
+                BEGIN
+                    DBCC CHECKIDENT (''?'', RESEED, 0)
+                END';
+                """);
+
             migrationBuilder.InsertData(
                table: "Artisian",
                columns: new[] { "description" },
@@ -54,23 +61,22 @@ namespace CrudEF.Migrations
                     {"Method 2" },
                 });
             migrationBuilder.InsertData(
-                table: "CustomerDiscount",
-                columns: new[] { "discount" },
-                values: new object[,]
-                {
-                    {"10" },
-                    {"15" },
-                });
-            migrationBuilder.InsertData(
                table: "Customer",
-               columns: new[] { "name", "adressId"},
+               columns: new[] { "name", "addressId"},
                values: new object[,]
                {
                     {"Borus", 1 },
                     {"Anton", 2 },
                     {"Oleg", 3 },
                });
-
+            migrationBuilder.InsertData(
+                table: "CustomerDiscount",
+                columns: new[] { "id", "discount" },
+                values: new object[,]
+                {
+                    {1, "10" },
+                    {2, "15" },
+                });
             migrationBuilder.InsertData(
                table: "ContactCustomer",
                columns: new[] { "email", "phone", "customerId" },
@@ -86,13 +92,13 @@ namespace CrudEF.Migrations
                columns: new[] { "categoryId", "name", "description", "availability" },
                values: new object[,]
                {
-                    {1, "Product Metal", true },
-                    {2, "Ceramist product", true },
-                    {3, "Pictures product", true },
+                    {1, "Product Metal", "Product Metal description", true },
+                    {2, "Ceramist product", "Product Metal description", true },
+                    {3, "Pictures product", "Product Metal description", true },
                });
             migrationBuilder.InsertData(
                table: "ProductPrice",
-               columns: new[] { "productId", "beginDate", "EndDate", "price" },
+               columns: new[] { "productId", "beginDate", "endDate", "price" },
                values: new object[,]
                {
                     {1, DateTime.Today.AddMonths(-2), DateTime.Today.AddMonths(-1), 10.99m },
@@ -105,11 +111,11 @@ namespace CrudEF.Migrations
                columns: new[] {"name", "description" },
                values: new object[,]
                {
-                    {"Nove Poshta", "Private carrier" },
+                    {"Nova Poshta", "Private carrier" },
                     {"UkrPoshta", "State carrier" }
                });
             migrationBuilder.InsertData(
-                table: "DeiveryOrder",
+                table: "DeliveryOrder",
                 columns: new[] { "shippingAddressId", "deliveryAddressId", "comment", "deliveryProviderId" },
                 values: new object[,]
                 {
@@ -136,7 +142,7 @@ namespace CrudEF.Migrations
                 });
             migrationBuilder.InsertData(
                 table: "NetworkArtisian",
-                columns: new[] { "socialNetwork", "description", "dataArtisianId" },
+                columns: new[] { "socialNetwork", "descriptioon", "dataArtisianId" },
                 values: new object[,]
                 {
                     {"instagram-url", "Instagram Page", 1 },
@@ -158,10 +164,10 @@ namespace CrudEF.Migrations
                 columns: new[] { "artisianId", "addressId", "description" },
                 values: new object[,]
                 {
-                    {1, "1234567890", 1, "First Artisian manufactory"},
-                    {2, "9876543210", 2, "Second Artisian manufactory"},
-                    {3, "2342342310", 3, "Third Artisian manufactory"},
-                    {1, "1234567890", 2, "First Artisian manufactory"}
+                    {1, 1, "First Artisian manufactory"},
+                    {2, 2, "Second Artisian manufactory"},
+                    {3, 3, "Third Artisian manufactory"},
+                    {1, 2, "First Artisian manufactory"}
                 });
             migrationBuilder.InsertData(
                 table: "DepartmentManufactory",
@@ -175,7 +181,7 @@ namespace CrudEF.Migrations
                 });
             migrationBuilder.InsertData(
                 table: "Employee",
-                columns: new[] {"name", "surname", "phone", "email", "departmentId"},
+                columns: new[] { "name", "surname", "phone", "email", "departmentId" },
                 values: new object[,]
                 {
                     {"Ivan", "Svitailo", "9687745219", "ivan@example.com", 1 },
@@ -188,14 +194,14 @@ namespace CrudEF.Migrations
                 columns: new[] { "departmentId", "productId", "inProduces", "countProduct" },
                 values: new object[,]
                 {
-                    {1, 1, "9687745219", true, 12 },
-                    {2, 2, "9232745219", true, 223 },
-                    {3, 2, "3877745234", true, 31 },
-                    {4, 3, "12232745255", true, 434 }
+                    {1, 1, true, 12 },
+                    {2, 2, true, 223 },
+                    {3, 2, true, 31 },
+                    {4, 3, true, 434 }
                 });
             migrationBuilder.InsertData(
                 table: "Order",
-                columns: new[] {"customerId", "orderDate", "deliveryId"},
+                columns: new[] { "customerId", "orderDate", "deliveryId" },
                 values: new object[,]
                 {
                     {1, "First Order", 1 },
@@ -212,15 +218,15 @@ namespace CrudEF.Migrations
                 });
             migrationBuilder.InsertData(
                 table: "Receipt",
-                columns: new[] {"totalAmount", "CustomerDiscount", "amountToPay"},
+                columns: new[] {"id", "totalAmount", "customerDiscountId", "amountToPay" },
                 values: new object[,]
                 {
-                    {55, 1, 49.5 },
-                    {147, 2, 124.95 }
+                    {1, 55, 1, 49.5 },
+                    {2, 147, 2, 124.95 }
                 });
             migrationBuilder.InsertData(
                 table: "Payment",
-                columns: new[] { "date", "amount", "PaymentMethod", "isSuccessful", "receipId" },
+                columns: new[] { "date", "amount", "paymentMethodId", "isSuccessful", "receipId" },
                 values: new object[,]
                 {
                     {DateTime.Now, 49.5, 1, true, 1 },
@@ -229,7 +235,7 @@ namespace CrudEF.Migrations
                 });
             migrationBuilder.InsertData(
                 table: "Rewiew",
-                columns: new[] {"productId", "customerId", "commnet"},
+                columns: new[] { "productId", "customerId", "comment" },
                 values: new object[,]
                 {
                     {1, 2, "Comment for the second product" },
@@ -242,69 +248,24 @@ namespace CrudEF.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
 
-           
+            migrationBuilder.Sql("EXEC sp_MSforeachtable 'ALTER TABLE ? NOCHECK CONSTRAINT all'");
 
-            //migrationBuilder.Sql("TRUNCATE TABLE ContactArtisian");
+            migrationBuilder.Sql("EXEC sp_MSforeachtable 'DELETE FROM ?'");
 
-            //migrationBuilder.Sql("TRUNCATE TABLE ContactCustomer");
+            migrationBuilder.Sql("""
+                EXEC sp_MSforeachtable @command1 =
+                'IF (SELECT COUNT(1) 
+                    FROM INFORMATION_SCHEMA.TABLES 
+                    WHERE TABLE_TYPE = ''BASE TABLE'' 
+                    AND ''[''+ TABLE_SCHEMA + ''].['' + TABLE_NAME + '']'' = ''?'' 
+                    AND OBJECTPROPERTY(OBJECT_ID(TABLE_NAME), ''TableHasIdentity'') = 1) > 0 
+                BEGIN
+                    DBCC CHECKIDENT (''?'', RESEED, 0)
+                END';
+                """);
 
-            //migrationBuilder.Sql("TRUNCATE TABLE DepartmentProduct");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE Employee");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE NetworkArtisian");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE OrderItem");
-
-            
-            //migrationBuilder.Sql("TRUNCATE TABLE Payment");
-            //migrationBuilder.Sql("TRUNCATE TABLE PaymentMethod");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE ProductPrice");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE Rewiew");
-
-            
-
-           
-
-            
-
-            
-
-            //migrationBuilder.Sql("TRUNCATE TABLE ProductCatalog");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE ManufactoryHub");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE CustomerDiscount");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE Receipt");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE Order");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE Category");
-
-            
-
-            //migrationBuilder.Sql("TRUNCATE TABLE DeliveryOrder");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE Customer");
-
-
-
-            //migrationBuilder.Sql("TRUNCATE TABLE Artisian");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE DeliveryProvider");
-
-   
-
-            //migrationBuilder.Sql("TRUNCATE TABLE DataArtisian");
-
-            //migrationBuilder.Sql("TRUNCATE TABLE DepartmentManufactory");
-
-            migrationBuilder.Sql("TRUNCATE TABLE Address");
+            migrationBuilder.Sql("EXEC sp_MSforeachtable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all'");
         }
     }
 }

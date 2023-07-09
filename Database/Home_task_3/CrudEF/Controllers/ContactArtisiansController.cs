@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.ContactArtisianDto;
+using CrudEF.ModelMapper.AddressDto;
+using System.Net;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +14,30 @@ namespace CrudEF.Controllers
     public class ContactArtisiansController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public ContactArtisiansController(ArtisianContext context)
+        public ContactArtisiansController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/ContactArtisians
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ContactArtisian>>> GetContactArtisians()
+        public async Task<ActionResult<IEnumerable<ContactArtisianGetDto>>> GetContactArtisians()
         {
           if (_context.ContactArtisians == null)
           {
               return NotFound();
           }
-            return await _context.ContactArtisians.ToListAsync();
+            var contactArtisian = await _context.ContactArtisians.ToListAsync();
+            var contactArtisianResult = _mapper.Map<IEnumerable<ContactArtisianGetDto>>(contactArtisian);
+            return Ok(contactArtisianResult);
         }
 
         // GET: api/ContactArtisians/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContactArtisian>> GetContactArtisian(long id)
+        public async Task<ActionResult<ContactArtisianGetDto>> GetContactArtisian(long id)
         {
           if (_context.ContactArtisians == null)
           {
@@ -46,15 +49,16 @@ namespace CrudEF.Controllers
             {
                 return NotFound();
             }
-
-            return contactArtisian;
+            var contactArtisianResult = _mapper.Map<ContactArtisianGetDto>(contactArtisian);
+            return contactArtisianResult;
         }
 
         // PUT: api/ContactArtisians/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutContactArtisian(long id, ContactArtisian contactArtisian)
+        public async Task<ActionResult<ContactArtisianGetDto>> PutContactArtisian(long id, ContactArtisianGetDto contactArtisianIncome)
         {
+            var contactArtisian = _mapper.Map<ContactArtisian>(contactArtisianIncome);
             if (id != contactArtisian.Id)
             {
                 return BadRequest();
@@ -78,22 +82,25 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var contactArtisianResult = _mapper.Map<ContactArtisianGetDto>(contactArtisian);
+            return Ok(contactArtisianResult);
         }
 
         // POST: api/ContactArtisians
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ContactArtisian>> PostContactArtisian(ContactArtisian contactArtisian)
+        public async Task<ActionResult<ContactArtisianGetDto>> PostContactArtisian(ContactArtisianPostDto contactArtisianIncome)
         {
-          if (_context.ContactArtisians == null)
-          {
-              return Problem("Entity set 'ArtisianContext.ContactArtisians'  is null.");
-          }
+            var contactArtisian = _mapper.Map<ContactArtisian>(contactArtisianIncome);
+            if (_context.ContactArtisians == null)
+            {
+                return Problem("Entity set 'ArtisianContext.ContactArtisians'  is null.");
+            }
             _context.ContactArtisians.Add(contactArtisian);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetContactArtisian", new { id = contactArtisian.Id }, contactArtisian);
+            var contactArtisianResult = _mapper.Map<ContactArtisianGetDto>(contactArtisian);
+            return contactArtisianResult;
         }
 
         // DELETE: api/ContactArtisians/5

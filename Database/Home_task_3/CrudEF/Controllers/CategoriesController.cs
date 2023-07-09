@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.CategoryDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(ArtisianContext context)
+        public CategoriesController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryGetDto>>> GetCategories()
         {
           if (_context.Categories == null)
           {
               return NotFound();
           }
-            return await _context.Categories.ToListAsync();
+            var category = await _context.Categories.ToListAsync();
+            var categoryResult = _mapper.Map<IEnumerable<CategoryGetDto>>(category);
+            return Ok(categoryResult);
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<CategoryGetDto>> GetCategory(int id)
         {
           if (_context.Categories == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return category;
+            var categoryResult = _mapper.Map<CategoryGetDto>(category);
+            return categoryResult;
         }
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<ActionResult<CategoryGetDto>> PutCategory(int id, CategoryGetDto categoryIncome)
         {
+            var category = _mapper.Map<Category>(categoryIncome);
+
             if (id != category.Id)
             {
                 return BadRequest();
@@ -78,22 +82,25 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var categoryResult = _mapper.Map<CategoryGetDto>(category);
+            return categoryResult;
         }
 
         // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<CategoryGetDto>> PostCategory(CategoryPostDto categoryIncome)
         {
-          if (_context.Categories == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Categories'  is null.");
-          }
+            var category = _mapper.Map<Category>(categoryIncome);
+            if (_context.Categories == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Categories'  is null.");
+            }
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+            var categoryResult = _mapper.Map<CategoryGetDto>(category);
+            return categoryResult;
         }
 
         // DELETE: api/Categories/5

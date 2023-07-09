@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.ArtisianDto;
+using CrudEF.ModelMapper.AddressDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +13,30 @@ namespace CrudEF.Controllers
     public class ArtisiansController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public ArtisiansController(ArtisianContext context)
+        public ArtisiansController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Artisians
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Artisian>>> GetArtisians()
+        public async Task<ActionResult<IEnumerable<ArtisianGetDto>>> GetArtisians()
         {
-          if (_context.Artisians == null)
-          {
-              return NotFound();
-          }
-            return await _context.Artisians.ToListAsync();
+            if (_context.Artisians == null)
+            {
+                return NotFound();
+            }
+            var artisian = await _context.Artisians.ToListAsync();
+            var artisianResult = _mapper.Map<IEnumerable<ArtisianGetDto>>(artisian);
+            return Ok(artisianResult);
         }
 
         // GET: api/Artisians/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Artisian>> GetArtisian(int id)
+        public async Task<ActionResult<ArtisianGetDto>> GetArtisian(int id)
         {
           if (_context.Artisians == null)
           {
@@ -47,14 +49,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return artisian;
+            var artisianResult = _mapper.Map<ArtisianGetDto>(artisian);
+            return artisianResult;
         }
 
         // PUT: api/Artisians/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutArtisian(int id, Artisian artisian)
+        public async Task<ActionResult<ArtisianGetDto>> PutArtisian(int id, ArtisianGetDto artisianIncome)
         {
+            var artisian = _mapper.Map<Artisian>(artisianIncome);
+
             if (id != artisian.Id)
             {
                 return BadRequest();
@@ -77,23 +82,25 @@ namespace CrudEF.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            var artisianResult = _mapper.Map<ArtisianGetDto>(artisian);
+            return artisianResult;
         }
 
         // POST: api/Artisians
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Artisian>> PostArtisian(Artisian artisian)
+        public async Task<ActionResult<ArtisianGetDto>> PostArtisian(ArtisianPostDto artisianIncome)
         {
-          if (_context.Artisians == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Artisians'  is null.");
-          }
+            var artisian = _mapper.Map<Artisian>(artisianIncome);
+            if (_context.Artisians == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Artisians'  is null.");
+            }
             _context.Artisians.Add(artisian);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetArtisian", new { id = artisian.Id }, artisian);
+            var artisianResult = _mapper.Map<ArtisianGetDto>(artisian);
+            return artisianResult;
         }
 
         // DELETE: api/Artisians/5

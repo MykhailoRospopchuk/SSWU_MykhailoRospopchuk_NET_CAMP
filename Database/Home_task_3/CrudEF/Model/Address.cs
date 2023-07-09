@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CrudEF.DB;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.OpenApi;
-using Microsoft.AspNetCore.Http.HttpResults;
-
+﻿
 namespace CrudEF.Model;
 
 public partial class Address

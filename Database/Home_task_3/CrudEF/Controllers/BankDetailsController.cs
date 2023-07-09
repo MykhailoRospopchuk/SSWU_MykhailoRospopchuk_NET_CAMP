@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.BankDetail;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class BankDetailsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public BankDetailsController(ArtisianContext context)
+        public BankDetailsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/BankDetails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BankDetail>>> GetBankDetails()
+        public async Task<ActionResult<IEnumerable<BankDetailGetDto>>> GetBankDetails()
         {
           if (_context.BankDetails == null)
           {
               return NotFound();
           }
-            return await _context.BankDetails.ToListAsync();
+            var bankDetail =  await _context.BankDetails.ToListAsync();
+            var bankDetailResult = _mapper.Map<IEnumerable<BankDetailGetDto>>(bankDetail);
+            return Ok(bankDetailResult);
         }
 
         // GET: api/BankDetails/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<BankDetail>> GetBankDetail(int id)
+        public async Task<ActionResult<BankDetailGetDto>> GetBankDetail(int id)
         {
           if (_context.BankDetails == null)
           {
@@ -47,14 +48,18 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return bankDetail;
+            var bankDetailResult = _mapper.Map<BankDetailGetDto>(bankDetail);
+
+            return bankDetailResult;
         }
 
         // PUT: api/BankDetails/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBankDetail(int id, BankDetail bankDetail)
+        public async Task<ActionResult<BankDetailGetDto>> PutBankDetail(int id, BankDetailGetDto bankDetailIncome)
         {
+            var bankDetail = _mapper.Map<BankDetail>(bankDetailIncome);
+
             if (id != bankDetail.Id)
             {
                 return BadRequest();
@@ -78,22 +83,26 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var bankDetailResult = _mapper.Map<BankDetailGetDto>(bankDetail);
+            return bankDetailResult;
         }
 
         // POST: api/BankDetails
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<BankDetail>> PostBankDetail(BankDetail bankDetail)
+        public async Task<ActionResult<BankDetailGetDto>> PostBankDetail(BankDetailPostDto bankDetailIncome)
         {
-          if (_context.BankDetails == null)
-          {
-              return Problem("Entity set 'ArtisianContext.BankDetails'  is null.");
-          }
+            var bankDetail = _mapper.Map<BankDetail>(bankDetailIncome);
+            if (_context.BankDetails == null)
+            {
+                return Problem("Entity set 'ArtisianContext.BankDetails'  is null.");
+            }
             _context.BankDetails.Add(bankDetail);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBankDetail", new { id = bankDetail.Id }, bankDetail);
+            var bankDetailResult = _mapper.Map<BankDetailGetDto>(bankDetail);
+
+            return bankDetailResult;
         }
 
         // DELETE: api/BankDetails/5

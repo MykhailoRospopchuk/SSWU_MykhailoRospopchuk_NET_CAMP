@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using CrudEF.ModelMapper.AddressDto;
+using AutoMapper;
 
 namespace CrudEF.Controllers
 {
@@ -15,46 +12,53 @@ namespace CrudEF.Controllers
     public class AddressesController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public AddressesController(ArtisianContext context)
+        public AddressesController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Addresses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
+        public async Task<ActionResult<IEnumerable<AddressGetDto>>> GetAddresses()
         {
-          if (_context.Addresses == null)
-          {
-              return NotFound();
-          }
-            return await _context.Addresses.ToListAsync();
+            if (_context.Addresses == null)
+            {
+                return NotFound();
+            }
+            var address = await _context.Addresses.ToListAsync();
+            var addressResult = _mapper.Map<IEnumerable<AddressGetDto>>(address);
+            return Ok(addressResult);
         }
 
         // GET: api/Addresses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Address>> GetAddress(int id)
+        public async Task<ActionResult<AddressGetDto>> GetAddress(int id)
         {
-          if (_context.Addresses == null)
-          {
-              return NotFound();
-          }
+            if (_context.Addresses == null)
+            {
+                return NotFound();
+            }
             var address = await _context.Addresses.FindAsync(id);
 
             if (address == null)
             {
                 return NotFound();
             }
+            var addressResult = _mapper.Map<AddressGetDto>(address);
 
-            return address;
+            return addressResult;
         }
 
         // PUT: api/Addresses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAddress(int id, Address address)
+        public async Task<ActionResult<AddressGetDto>> PutAddress(int id, AddressGetDto addressIncome)
         {
+            var address = _mapper.Map<Address>(addressIncome);
+
             if (id != address.Id)
             {
                 return BadRequest();
@@ -77,23 +81,25 @@ namespace CrudEF.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            var addressResult = _mapper.Map<AddressGetDto>(address);
+            return addressResult;
         }
 
         // POST: api/Addresses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Address>> PostAddress(Address address)
+        public async Task<ActionResult<AddressGetDto>> PostAddress(AddressPostDto addressIncome)
         {
-          if (_context.Addresses == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Addresses'  is null.");
-          }
+            var address = _mapper.Map<Address>(addressIncome);
+            if (_context.Addresses == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Addresses'  is null.");
+            }
             _context.Addresses.Add(address);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAddress", new { id = address.Id }, address);
+            var addressResult = _mapper.Map<AddressGetDto>(address);
+            return addressResult;
         }
 
         // DELETE: api/Addresses/5
@@ -113,7 +119,7 @@ namespace CrudEF.Controllers
             _context.Addresses.Remove(address);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool AddressExists(int id)

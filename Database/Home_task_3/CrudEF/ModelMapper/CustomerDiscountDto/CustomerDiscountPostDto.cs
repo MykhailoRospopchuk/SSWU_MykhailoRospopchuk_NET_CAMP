@@ -2,7 +2,7 @@
 
 namespace CrudEF.ModelMapper.CustomerDiscountDto
 {
-    public class CustomerDiscountPostDto
+    public class CustomerDiscountPostDto : BaseDto
     {
         [Required(ErrorMessage = "Discount is required")]
         public decimal Discount { get; set; }

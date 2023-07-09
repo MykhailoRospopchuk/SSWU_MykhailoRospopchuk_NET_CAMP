@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.CustomerDiscountDto;
 
 namespace CrudEF.Controllers
 {
@@ -10,31 +12,35 @@ namespace CrudEF.Controllers
     public class CustomerDiscountsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public CustomerDiscountsController(ArtisianContext context)
+        public CustomerDiscountsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/CustomerDiscounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CustomerDiscount>>> GetCustomerDiscounts()
+        public async Task<ActionResult<IEnumerable<CustomerDiscountGetDto>>> GetCustomerDiscounts()
         {
-          if (_context.CustomerDiscounts == null)
-          {
-              return NotFound();
-          }
-            return await _context.CustomerDiscounts.ToListAsync();
+            if (_context.CustomerDiscounts == null)
+            {
+                return NotFound();
+            }
+            var discount =  await _context.CustomerDiscounts.ToListAsync();
+            var discountResult = _mapper.Map<IEnumerable<CustomerDiscountGetDto>>(discount);
+            return Ok(discountResult);
         }
 
         // GET: api/CustomerDiscounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerDiscount>> GetCustomerDiscount(int id)
+        public async Task<ActionResult<CustomerDiscountGetDto>> GetCustomerDiscount(int id)
         {
-          if (_context.CustomerDiscounts == null)
-          {
-              return NotFound();
-          }
+            if (_context.CustomerDiscounts == null)
+            {
+                return NotFound();
+            }
             var customerDiscount = await _context.CustomerDiscounts.FindAsync(id);
 
             if (customerDiscount == null)
@@ -42,14 +48,16 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return customerDiscount;
+            var customerDiscountResult = _mapper.Map<CustomerDiscountGetDto>(customerDiscount);
+            return customerDiscountResult;
         }
 
         // PUT: api/CustomerDiscounts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomerDiscount(int id, CustomerDiscount customerDiscount)
+        public async Task<ActionResult<CustomerDiscountGetDto>> PutCustomerDiscount(int id, CustomerDiscountGetDto customerDiscountIncome)
         {
+            var customerDiscount = _mapper.Map<CustomerDiscount>(customerDiscountIncome);
             if (id != customerDiscount.Id)
             {
                 return BadRequest();
@@ -72,19 +80,20 @@ namespace CrudEF.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            var customerDiscountResult = _mapper.Map<CustomerDiscountGetDto>(customerDiscount);
+            return customerDiscountResult;
         }
 
         // POST: api/CustomerDiscounts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CustomerDiscount>> PostCustomerDiscount(CustomerDiscount customerDiscount)
+        public async Task<ActionResult<CustomerDiscountGetDto>> PostCustomerDiscount(CustomerDiscountPostDto customerDiscountIncome)
         {
-          if (_context.CustomerDiscounts == null)
-          {
-              return Problem("Entity set 'ArtisianContext.CustomerDiscounts'  is null.");
-          }
+            var customerDiscount = _mapper.Map<CustomerDiscount>(customerDiscountIncome);
+            if (_context.CustomerDiscounts == null)
+            {
+                return Problem("Entity set 'ArtisianContext.CustomerDiscounts'  is null.");
+            }
             _context.CustomerDiscounts.Add(customerDiscount);
             try
             {
@@ -101,8 +110,8 @@ namespace CrudEF.Controllers
                     throw;
                 }
             }
-
-            return CreatedAtAction("GetCustomerDiscount", new { id = customerDiscount.Id }, customerDiscount);
+            var customerDiscountResult = _mapper.Map<CustomerDiscountGetDto>(customerDiscount);
+            return customerDiscountResult;
         }
 
         // DELETE: api/CustomerDiscounts/5

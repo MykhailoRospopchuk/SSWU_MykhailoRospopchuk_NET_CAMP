@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace CrudEF.Model;
 
 public partial class Payment
@@ -8,8 +6,6 @@ public partial class Payment
     public int Id { get; set; }
 
     public DateTime Date { get; set; }
-
-    public decimal Amount { get; set; }
 
     public int PaymentMethodId { get; set; }
 

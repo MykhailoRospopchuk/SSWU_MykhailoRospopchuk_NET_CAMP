@@ -5,7 +5,8 @@ namespace CrudEF.Model;
 
 public partial class DataArtisian
 {
-    public int ArtisianId { get; set; }
+    //public int ArtisianId { get; set; }
+    public int Id { get; set; }
 
     public string? Description { get; set; }
 

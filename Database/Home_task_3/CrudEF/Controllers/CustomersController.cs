@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.CustomerDto;
+using CrudEF.ModelMapper.AddressDto;
+using System.Net;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +14,30 @@ namespace CrudEF.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public CustomersController(ArtisianContext context)
+        public CustomersController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<CustomerGetDto>>> GetCustomers()
         {
           if (_context.Customers == null)
           {
               return NotFound();
           }
-            return await _context.Customers.ToListAsync();
+            var customer =  await _context.Customers.ToListAsync();
+            var customerResult = _mapper.Map<IEnumerable<CustomerGetDto>>(customer);
+            return Ok(customerResult);
         }
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        public async Task<ActionResult<CustomerGetDto>> GetCustomer(int id)
         {
           if (_context.Customers == null)
           {
@@ -47,14 +50,16 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return customer;
+            var customerResult = _mapper.Map<CustomerGetDto>(customer);
+            return customerResult;
         }
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, Customer customer)
+        public async Task<ActionResult<CustomerGetDto>> PutCustomer(int id, CustomerGetDto customerIncome)
         {
+            var customer = _mapper.Map<Customer>(customerIncome);
             if (id != customer.Id)
             {
                 return BadRequest();
@@ -78,22 +83,25 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var customerResult = _mapper.Map<CustomerGetDto>(customer);
+            return customerResult;
         }
 
         // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<CustomerGetDto>> PostCustomer(CustomerPostDto customerIncome)
         {
-          if (_context.Customers == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Customers'  is null.");
-          }
+            var customer = _mapper.Map<Customer>(customerIncome);
+            if (_context.Customers == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Customers'  is null.");
+            }
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+            var customerResult = _mapper.Map<CustomerGetDto>(customer);
+            return customerResult;
         }
 
         // DELETE: api/Customers/5

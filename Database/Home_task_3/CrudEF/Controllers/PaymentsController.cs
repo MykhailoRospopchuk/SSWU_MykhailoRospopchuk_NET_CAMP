@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.PaymentDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,31 +12,35 @@ namespace CrudEF.Controllers
     public class PaymentsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public PaymentsController(ArtisianContext context)
+        public PaymentsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Payments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Payment>>> GetPayments()
+        public async Task<ActionResult<IEnumerable<PaymentGetDto>>> GetPayments()
         {
-          if (_context.Payments == null)
-          {
-              return NotFound();
-          }
-            return await _context.Payments.ToListAsync();
+            if (_context.Payments == null)
+            {
+                return NotFound();
+            }
+            var payment = await _context.Payments.ToListAsync();
+            var paymentResult = _mapper.Map< IEnumerable<PaymentGetDto>>(payment);
+            return Ok(paymentResult);
         }
 
         // GET: api/Payments/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Payment>> GetPayment(int id)
+        public async Task<ActionResult<PaymentGetDto>> GetPayment(int id)
         {
-          if (_context.Payments == null)
-          {
-              return NotFound();
-          }
+            if (_context.Payments == null)
+            {
+                return NotFound();
+            }
             var payment = await _context.Payments.FindAsync(id);
 
             if (payment == null)
@@ -47,18 +48,23 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return payment;
+            var paymentResult = _mapper.Map<PaymentGetDto>(payment);
+            return paymentResult;
         }
 
         // PUT: api/Payments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPayment(int id, Payment payment)
+        public async Task<ActionResult<PaymentGetDto>> PutPayment(int id, PaymentPutDto paymentIncome)
         {
+            var payment = _mapper.Map<Payment>(paymentIncome);
+
             if (id != payment.Id)
             {
                 return BadRequest();
             }
+
+            payment.Date = DateTime.Now;
 
             _context.Entry(payment).State = EntityState.Modified;
 
@@ -78,22 +84,29 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var paymentResult = _mapper.Map<PaymentGetDto>(payment);
+            return paymentResult;
         }
 
         // POST: api/Payments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Payment>> PostPayment(Payment payment)
+        public async Task<ActionResult<PaymentGetDto>> PostPayment(PaymentPostDto paymentIncome)
         {
-          if (_context.Payments == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Payments'  is null.");
-          }
+            var payment = _mapper.Map<Payment>(paymentIncome);
+
+            if (_context.Payments == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Payments'  is null.");
+            }
+
+            payment.Date = DateTime.Now;
+
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPayment", new { id = payment.Id }, payment);
+            var paymentResult = _mapper.Map<PaymentGetDto>(payment);
+            return paymentResult;
         }
 
         // DELETE: api/Payments/5

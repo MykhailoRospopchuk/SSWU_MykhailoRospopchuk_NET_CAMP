@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.OrderDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,31 +17,35 @@ namespace CrudEF.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public OrdersController(ArtisianContext context)
+        public OrdersController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Orders
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<OrderGetDto>>> GetOrders()
         {
           if (_context.Orders == null)
           {
               return NotFound();
           }
-            return await _context.Orders.ToListAsync();
+            var order = await _context.Orders.ToListAsync();
+            var orderResult = _mapper.Map< IEnumerable<OrderGetDto>>(order);
+            return Ok(orderResult);
         }
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<OrderGetDto>> GetOrder(int id)
         {
-          if (_context.Orders == null)
-          {
-              return NotFound();
-          }
+            if (_context.Orders == null)
+            {
+                return NotFound();
+            }
             var order = await _context.Orders.FindAsync(id);
 
             if (order == null)
@@ -47,14 +53,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return order;
+            var orderResult = _mapper.Map<OrderGetDto>(order);
+            return orderResult;
         }
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        public async Task<ActionResult<OrderGetDto>> PutOrder(int id, OrderGetDto orderIncome)
         {
+            var order = _mapper.Map<Order>(orderIncome);
+
             if (id != order.Id)
             {
                 return BadRequest();
@@ -78,22 +87,26 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var orderResult = _mapper.Map<OrderGetDto>(order);
+            return orderResult;
         }
 
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<OrderGetDto>> PostOrder(OrderPostDto orderIncome)
         {
-          if (_context.Orders == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Orders'  is null.");
-          }
+
+            var order = _mapper.Map<Order>(orderIncome);
+            if (_context.Orders == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Orders'  is null.");
+            }
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+            var orderResult = _mapper.Map<OrderGetDto>(order);
+            return orderResult;
         }
 
         // DELETE: api/Orders/5

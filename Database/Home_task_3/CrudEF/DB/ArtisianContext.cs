@@ -226,14 +226,15 @@ public partial class ArtisianContext : DbContext
 
         modelBuilder.Entity<DataArtisian>(entity =>
         {
-            entity.HasKey(e => e.ArtisianId).HasName("dataartisian_id_primary");
+            entity.HasKey(e => e.Id).HasName("dataartisian_id_primary");
 
             entity.ToTable("DataArtisian");
 
             entity.HasIndex(e => e.AddressId, "addresId").IsUnique();
 
-            entity.Property(e => e.ArtisianId)
-                .ValueGeneratedOnAdd()
+            entity.Property(e => e.Id)
+                //.ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("artisianId");
             entity.Property(e => e.AddressId).HasColumnName("addressId");
             entity.Property(e => e.Description)
@@ -251,7 +252,7 @@ public partial class ArtisianContext : DbContext
                 .HasConstraintName("FK_DataArtisian_Address");
 
             entity.HasOne(d => d.Artisian).WithOne(p => p.DataArtisian)
-                .HasForeignKey<DataArtisian>(d => d.ArtisianId)
+                .HasForeignKey<DataArtisian>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_DataArtisian_Artisian");
         });
@@ -468,9 +469,7 @@ public partial class ArtisianContext : DbContext
             entity.ToTable("Payment");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Amount)
-                .HasColumnType("decimal(8, 2)")
-                .HasColumnName("amount");
+
             entity.Property(e => e.Date)
                 .HasColumnType("datetime")
                 .HasColumnName("date");
@@ -558,7 +557,8 @@ public partial class ArtisianContext : DbContext
             entity.ToTable("Receipt");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                //.ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.AmountToPay)
                 .HasColumnType("decimal(18, 0)")

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.ReceiptDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class ReceiptsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public ReceiptsController(ArtisianContext context)
+        public ReceiptsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Receipts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Receipt>>> GetReceipts()
+        public async Task<ActionResult<IEnumerable<ReceiptGetDto>>> GetReceipts()
         {
-          if (_context.Receipts == null)
-          {
-              return NotFound();
-          }
-            return await _context.Receipts.ToListAsync();
+            if (_context.Receipts == null)
+            {
+                return NotFound();
+            }
+            var receipt = await _context.Receipts.ToListAsync();
+            var receiptResult = _mapper.Map< IEnumerable<ReceiptGetDto>>(receipt);
+            return Ok(receiptResult);
         }
 
         // GET: api/Receipts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Receipt>> GetReceipt(int id)
+        public async Task<ActionResult<ReceiptGetDto>> GetReceipt(int id)
         {
           if (_context.Receipts == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return receipt;
+            var receiptResult = _mapper.Map<ReceiptGetDto>(receipt);
+            return receiptResult;
         }
 
         // PUT: api/Receipts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReceipt(int id, Receipt receipt)
+        public async Task<ActionResult<ReceiptGetDto>> PutReceipt(int id, ReceiptGetDto receiptIncome)
         {
+            var receipt = _mapper.Map<Receipt>(receiptIncome);
+
             if (id != receipt.Id)
             {
                 return BadRequest();
@@ -78,22 +82,25 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var receiptResult = _mapper.Map<ReceiptGetDto>(receipt);
+            return receiptResult;
         }
 
         // POST: api/Receipts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Receipt>> PostReceipt(Receipt receipt)
+        public async Task<ActionResult<ReceiptGetDto>> PostReceipt(ReceiptPostDto receiptIncome)
         {
-          if (_context.Receipts == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Receipts'  is null.");
-          }
+            var receipt = _mapper.Map<Receipt>(receiptIncome);
+            if (_context.Receipts == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Receipts'  is null.");
+            }
             _context.Receipts.Add(receipt);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReceipt", new { id = receipt.Id }, receipt);
+            var receiptResult = _mapper.Map<ReceiptGetDto>(receipt);
+            return receiptResult;
         }
 
         // DELETE: api/Receipts/5
@@ -113,7 +120,7 @@ namespace CrudEF.Controllers
             _context.Receipts.Remove(receipt);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool ReceiptExists(int id)

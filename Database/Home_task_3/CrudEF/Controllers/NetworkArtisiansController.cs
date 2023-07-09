@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.NetworkArtisian;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class NetworkArtisiansController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public NetworkArtisiansController(ArtisianContext context)
+        public NetworkArtisiansController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/NetworkArtisians
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<NetworkArtisian>>> GetNetworkArtisians()
+        public async Task<ActionResult<IEnumerable<NetworkArtisianGetDto>>> GetNetworkArtisians()
         {
           if (_context.NetworkArtisians == null)
           {
               return NotFound();
           }
-            return await _context.NetworkArtisians.ToListAsync();
+            var networkArtisian = await _context.NetworkArtisians.ToListAsync();
+            var networkArtisianResult = _mapper.Map<IEnumerable<NetworkArtisianGetDto>>(networkArtisian);
+            return Ok(networkArtisianResult);
         }
 
         // GET: api/NetworkArtisians/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<NetworkArtisian>> GetNetworkArtisian(int id)
+        public async Task<ActionResult<NetworkArtisianGetDto>> GetNetworkArtisian(int id)
         {
           if (_context.NetworkArtisians == null)
           {
@@ -46,15 +47,17 @@ namespace CrudEF.Controllers
             {
                 return NotFound();
             }
-
-            return networkArtisian;
+            var networkArtisianResult = _mapper.Map<NetworkArtisianGetDto>(networkArtisian);
+            return networkArtisianResult;
         }
 
         // PUT: api/NetworkArtisians/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNetworkArtisian(int id, NetworkArtisian networkArtisian)
+        public async Task<ActionResult<NetworkArtisianGetDto>> PutNetworkArtisian(int id, NetworkArtisianGetDto networkArtisianIncome)
         {
+            var networkArtisian = _mapper.Map<NetworkArtisian>(networkArtisianIncome);
+
             if (id != networkArtisian.Id)
             {
                 return BadRequest();
@@ -78,22 +81,25 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var networkArtisianResult = _mapper.Map<NetworkArtisianGetDto>(networkArtisian);
+            return networkArtisianResult;
         }
 
         // POST: api/NetworkArtisians
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<NetworkArtisian>> PostNetworkArtisian(NetworkArtisian networkArtisian)
+        public async Task<ActionResult<NetworkArtisianGetDto>> PostNetworkArtisian(NetworkArtisianPostDto networkArtisianIncome)
         {
-          if (_context.NetworkArtisians == null)
-          {
-              return Problem("Entity set 'ArtisianContext.NetworkArtisians'  is null.");
-          }
+            var networkArtisian = _mapper.Map<NetworkArtisian>(networkArtisianIncome);
+            if (_context.NetworkArtisians == null)
+            {
+                return Problem("Entity set 'ArtisianContext.NetworkArtisians'  is null.");
+            }
             _context.NetworkArtisians.Add(networkArtisian);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetNetworkArtisian", new { id = networkArtisian.Id }, networkArtisian);
+            var networkArtisianResult = _mapper.Map<NetworkArtisianGetDto>(networkArtisian);
+            return networkArtisianResult;
         }
 
         // DELETE: api/NetworkArtisians/5

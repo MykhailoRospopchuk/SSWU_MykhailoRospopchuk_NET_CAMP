@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.DataArtisianDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class DataArtisiansController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public DataArtisiansController(ArtisianContext context)
+        public DataArtisiansController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/DataArtisians
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DataArtisian>>> GetDataArtisians()
+        public async Task<ActionResult<IEnumerable<DataArtisianGetDto>>> GetDataArtisians()
         {
           if (_context.DataArtisians == null)
           {
               return NotFound();
           }
-            return await _context.DataArtisians.ToListAsync();
+            var dataArtisian =  await _context.DataArtisians.ToListAsync();
+            var dataArtisianResult = _mapper.Map<IEnumerable<DataArtisianGetDto>>(dataArtisian);
+            return Ok(dataArtisianResult);
         }
 
         // GET: api/DataArtisians/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DataArtisian>> GetDataArtisian(int id)
+        public async Task<ActionResult<DataArtisianGetDto>> GetDataArtisian(int id)
         {
           if (_context.DataArtisians == null)
           {
@@ -47,15 +48,18 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return dataArtisian;
+            var dataArtisianResult = _mapper.Map<DataArtisianGetDto>(dataArtisian);
+            return dataArtisianResult;
         }
 
         // PUT: api/DataArtisians/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDataArtisian(int id, DataArtisian dataArtisian)
+        public async Task<ActionResult<DataArtisianGetDto>> PutDataArtisian(int id, DataArtisianGetDto dataArtisianIncome)
         {
-            if (id != dataArtisian.ArtisianId)
+            var dataArtisian = _mapper.Map<DataArtisian>(dataArtisianIncome);
+
+            if (id != dataArtisian.Id)
             {
                 return BadRequest();
             }
@@ -78,22 +82,25 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var dataArtisianResult = _mapper.Map<DataArtisianGetDto>(dataArtisian);
+            return dataArtisianResult;
         }
 
         // POST: api/DataArtisians
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DataArtisian>> PostDataArtisian(DataArtisian dataArtisian)
+        public async Task<ActionResult<DataArtisianGetDto>> PostDataArtisian(DataArtisianPostDto dataArtisianIncome)
         {
-          if (_context.DataArtisians == null)
-          {
-              return Problem("Entity set 'ArtisianContext.DataArtisians'  is null.");
-          }
+            var dataArtisian = _mapper.Map<DataArtisian>(dataArtisianIncome);
+            if (_context.DataArtisians == null)
+            {
+                return Problem("Entity set 'ArtisianContext.DataArtisians'  is null.");
+            }
             _context.DataArtisians.Add(dataArtisian);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDataArtisian", new { id = dataArtisian.ArtisianId }, dataArtisian);
+            var dataArtisianResult = _mapper.Map<DataArtisianGetDto>(dataArtisian);
+            return dataArtisianResult;
         }
 
         // DELETE: api/DataArtisians/5
@@ -118,7 +125,7 @@ namespace CrudEF.Controllers
 
         private bool DataArtisianExists(int id)
         {
-            return (_context.DataArtisians?.Any(e => e.ArtisianId == id)).GetValueOrDefault();
+            return (_context.DataArtisians?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

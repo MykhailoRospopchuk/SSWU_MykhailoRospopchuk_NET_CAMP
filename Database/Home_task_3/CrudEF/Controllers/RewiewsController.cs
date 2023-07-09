@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.Rewiew;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class RewiewsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public RewiewsController(ArtisianContext context)
+        public RewiewsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Rewiews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rewiew>>> GetRewiews()
+        public async Task<ActionResult<IEnumerable<RewiewGetDto>>> GetRewiews()
         {
           if (_context.Rewiews == null)
           {
               return NotFound();
           }
-            return await _context.Rewiews.ToListAsync();
+            var rewiew = await _context.Rewiews.ToListAsync();
+            var rewiewResult = _mapper.Map< IEnumerable<RewiewGetDto>>(rewiew);
+            return Ok(rewiewResult);
         }
 
         // GET: api/Rewiews/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Rewiew>> GetRewiew(int id)
+        public async Task<ActionResult<RewiewGetDto>> GetRewiew(int id)
         {
           if (_context.Rewiews == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return rewiew;
+            var rewiewResult = _mapper.Map<RewiewGetDto>(rewiew);
+            return rewiewResult;
         }
 
         // PUT: api/Rewiews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRewiew(int id, Rewiew rewiew)
+        public async Task<ActionResult<RewiewGetDto>> PutRewiew(int id, RewiewGetDto rewiewIncome)
         {
+            var rewiew = _mapper.Map<Rewiew>(rewiewIncome);
+
             if (id != rewiew.Id)
             {
                 return BadRequest();
@@ -78,22 +82,26 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var rewiewResult = _mapper.Map<RewiewGetDto>(rewiew);
+            return rewiewResult;
         }
 
         // POST: api/Rewiews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Rewiew>> PostRewiew(Rewiew rewiew)
+        public async Task<ActionResult<RewiewGetDto>> PostRewiew(RewiewPostDto rewiewIncome)
         {
-          if (_context.Rewiews == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Rewiews'  is null.");
-          }
+            var rewiew = _mapper.Map<Rewiew>(rewiewIncome);
+
+            if (_context.Rewiews == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Rewiews'  is null.");
+            }
             _context.Rewiews.Add(rewiew);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRewiew", new { id = rewiew.Id }, rewiew);
+            var rewiewResult = _mapper.Map<RewiewGetDto>(rewiew);
+            return rewiewResult;
         }
 
         // DELETE: api/Rewiews/5

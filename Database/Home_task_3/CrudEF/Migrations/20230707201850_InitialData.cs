@@ -226,12 +226,12 @@ namespace CrudEF.Migrations
                 });
             migrationBuilder.InsertData(
                 table: "Payment",
-                columns: new[] { "date", "amount", "paymentMethodId", "isSuccessful", "receipId" },
+                columns: new[] { "date", "paymentMethodId", "isSuccessful", "receipId" },
                 values: new object[,]
                 {
-                    {DateTime.Now, 49.5, 1, true, 1 },
-                    {DateTime.Now, 124.95, 1, false, 2 },
-                    {DateTime.Now, 124.95, 2, true, 2 }
+                    {DateTime.Now, 1, true, 1 },
+                    {DateTime.Now, 1, false, 2 },
+                    {DateTime.Now, 2, true, 2 }
                 });
             migrationBuilder.InsertData(
                 table: "Rewiew",

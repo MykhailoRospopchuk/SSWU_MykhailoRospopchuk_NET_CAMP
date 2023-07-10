@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace CrudEF.Model;
 
 public partial class ProductCatalog

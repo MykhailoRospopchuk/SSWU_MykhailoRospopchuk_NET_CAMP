@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.EmployeeDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public EmployeesController(ArtisianContext context)
+        public EmployeesController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Employees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<EmployeeGetDto>>> GetEmployees()
         {
-          if (_context.Employees == null)
-          {
-              return NotFound();
-          }
-            return await _context.Employees.ToListAsync();
+            if (_context.Employees == null)
+            {
+                return NotFound();
+            }
+            var employee = await _context.Employees.ToListAsync();
+            var employeeResult = _mapper.Map< IEnumerable<EmployeeGetDto>>(employee);
+            return Ok(employeeResult);
         }
 
         // GET: api/Employees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        public async Task<ActionResult<EmployeeGetDto>> GetEmployee(int id)
         {
           if (_context.Employees == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return employee;
+            var employeeResult = _mapper.Map<EmployeeGetDto>(employee);
+            return Ok(employeeResult);
         }
 
         // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id, Employee employee)
+        public async Task<ActionResult<EmployeeGetDto>> PutEmployee(int id, EmployeeGetDto employeeIncome)
         {
+            var employee = _mapper.Map<Employee>(employeeIncome);
+
             if (id != employee.Id)
             {
                 return BadRequest();
@@ -78,22 +82,26 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var employeeResult = _mapper.Map<EmployeeGetDto>(employee);
+            return Ok(employeeResult);
         }
 
         // POST: api/Employees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        public async Task<ActionResult<EmployeeGetDto>> PostEmployee(EmployeePostDto employeeIncome)
         {
-          if (_context.Employees == null)
-          {
-              return Problem("Entity set 'ArtisianContext.Employees'  is null.");
-          }
+            var employee = _mapper.Map<Employee>(employeeIncome);
+
+            if (_context.Employees == null)
+            {
+                return Problem("Entity set 'ArtisianContext.Employees'  is null.");
+            }
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
+            var employeeResult = _mapper.Map<EmployeeGetDto>(employee);
+            return Ok(employeeResult);
         }
 
         // DELETE: api/Employees/5

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.ManufactoryHub;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class ManufactoryHubsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public ManufactoryHubsController(ArtisianContext context)
+        public ManufactoryHubsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/ManufactoryHubs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ManufactoryHub>>> GetManufactoryHubs()
+        public async Task<ActionResult<IEnumerable<ManufactoryHubGetDto>>> GetManufactoryHubs()
         {
           if (_context.ManufactoryHubs == null)
           {
               return NotFound();
           }
-            return await _context.ManufactoryHubs.ToListAsync();
+            var manufactoryHub = await _context.ManufactoryHubs.ToListAsync();
+            var manufactoryHubResult = _mapper.Map<IEnumerable<ManufactoryHubGetDto>>(manufactoryHub);
+            return Ok(manufactoryHubResult);
         }
 
         // GET: api/ManufactoryHubs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ManufactoryHub>> GetManufactoryHub(int id)
+        public async Task<ActionResult<ManufactoryHubGetDto>> GetManufactoryHub(int id)
         {
           if (_context.ManufactoryHubs == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return manufactoryHub;
+            var manufactoryHubResult = _mapper.Map<ManufactoryHubGetDto>(manufactoryHub);
+            return manufactoryHubResult;
         }
 
         // PUT: api/ManufactoryHubs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutManufactoryHub(int id, ManufactoryHub manufactoryHub)
+        public async Task<ActionResult<ManufactoryHubGetDto>> PutManufactoryHub(int id, ManufactoryHubGetDto manufactoryHubIncome)
         {
+            var manufactoryHub = _mapper.Map<ManufactoryHub>(manufactoryHubIncome);
+
             if (id != manufactoryHub.Id)
             {
                 return BadRequest();
@@ -78,22 +82,25 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var manufactoryHubResult = _mapper.Map<ManufactoryHubGetDto>(manufactoryHub);
+            return manufactoryHubResult;
         }
 
         // POST: api/ManufactoryHubs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ManufactoryHub>> PostManufactoryHub(ManufactoryHub manufactoryHub)
+        public async Task<ActionResult<ManufactoryHubGetDto>> PostManufactoryHub(ManufactoryHubPostDto manufactoryHubIncome)
         {
-          if (_context.ManufactoryHubs == null)
-          {
-              return Problem("Entity set 'ArtisianContext.ManufactoryHubs'  is null.");
-          }
+            var manufactoryHub = _mapper.Map<ManufactoryHub>(manufactoryHubIncome);
+            if (_context.ManufactoryHubs == null)
+            {
+                return Problem("Entity set 'ArtisianContext.ManufactoryHubs'  is null.");
+            }
             _context.ManufactoryHubs.Add(manufactoryHub);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetManufactoryHub", new { id = manufactoryHub.Id }, manufactoryHub);
+            var manufactoryHubResult = _mapper.Map<ManufactoryHubGetDto>(manufactoryHub);
+            return manufactoryHubResult;
         }
 
         // DELETE: api/ManufactoryHubs/5

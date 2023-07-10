@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.ProductCatalog;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class ProductCatalogsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductCatalogsController(ArtisianContext context)
+        public ProductCatalogsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/ProductCatalogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductCatalog>>> GetProductCatalogs()
+        public async Task<ActionResult<IEnumerable<ProductCatalogGetDto>>> GetProductCatalogs()
         {
           if (_context.ProductCatalogs == null)
           {
               return NotFound();
           }
-            return await _context.ProductCatalogs.ToListAsync();
+            var productCatalog = await _context.ProductCatalogs.ToListAsync();
+            var productCatalogResult = _mapper.Map< IEnumerable<ProductCatalogGetDto>>(productCatalog);
+            return Ok(productCatalogResult);
         }
 
         // GET: api/ProductCatalogs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductCatalog>> GetProductCatalog(int id)
+        public async Task<ActionResult<ProductCatalogGetDto>> GetProductCatalog(int id)
         {
           if (_context.ProductCatalogs == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return productCatalog;
+            var productCatalogResult = _mapper.Map<ProductCatalogGetDto>(productCatalog);
+            return productCatalogResult;
         }
 
         // PUT: api/ProductCatalogs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductCatalog(int id, ProductCatalog productCatalog)
+        public async Task<ActionResult<ProductCatalogGetDto>> PutProductCatalog(int id, ProductCatalogGetDto productCatalogIncome)
         {
+            var productCatalog = _mapper.Map<ProductCatalog>(productCatalogIncome);
+
             if (id != productCatalog.Id)
             {
                 return BadRequest();
@@ -78,22 +82,26 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var productCatalogResult = _mapper.Map<ProductCatalogGetDto>(productCatalog);
+            return productCatalogResult;
         }
 
         // POST: api/ProductCatalogs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProductCatalog>> PostProductCatalog(ProductCatalog productCatalog)
+        public async Task<ActionResult<ProductCatalogGetDto>> PostProductCatalog(ProductCatalogPostDto productCatalogIncome)
         {
-          if (_context.ProductCatalogs == null)
-          {
-              return Problem("Entity set 'ArtisianContext.ProductCatalogs'  is null.");
-          }
+            var productCatalog = _mapper.Map<ProductCatalog>(productCatalogIncome);
+
+            if (_context.ProductCatalogs == null)
+            {
+                return Problem("Entity set 'ArtisianContext.ProductCatalogs'  is null.");
+            }
             _context.ProductCatalogs.Add(productCatalog);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProductCatalog", new { id = productCatalog.Id }, productCatalog);
+            var productCatalogResult = _mapper.Map<ProductCatalogGetDto>(productCatalog);
+            return productCatalogResult;
         }
 
         // DELETE: api/ProductCatalogs/5

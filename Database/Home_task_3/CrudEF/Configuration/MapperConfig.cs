@@ -11,11 +11,17 @@ using CrudEF.ModelMapper.CustomerDto;
 using CrudEF.ModelMapper.DataArtisianDto;
 using CrudEF.ModelMapper.DeliveryOrderDto;
 using CrudEF.ModelMapper.DeliveryProviderDto;
+using CrudEF.ModelMapper.DepartmentManufactoryDto;
+using CrudEF.ModelMapper.DepartmentProductDto;
+using CrudEF.ModelMapper.EmployeeDto;
+using CrudEF.ModelMapper.ManufactoryHub;
 using CrudEF.ModelMapper.NetworkArtisian;
 using CrudEF.ModelMapper.OrderDto;
 using CrudEF.ModelMapper.OrderItem;
 using CrudEF.ModelMapper.PaymentDto;
 using CrudEF.ModelMapper.PaymentMethodDto;
+using CrudEF.ModelMapper.ProductCatalog;
+using CrudEF.ModelMapper.ProductPriceDto;
 using CrudEF.ModelMapper.ReceiptDto;
 using CrudEF.ModelMapper.Rewiew;
 
@@ -79,6 +85,25 @@ namespace CrudEF.Configuration
 
             CreateMap<RewiewGetDto, Rewiew>().ReverseMap();
             CreateMap<RewiewPostDto, Rewiew>().ReverseMap();
+
+            CreateMap<EmployeeGetDto, Employee>().ReverseMap();
+            CreateMap<EmployeePostDto, Employee>().ReverseMap();
+
+            CreateMap<ManufactoryHubGetDto, ManufactoryHub>().ReverseMap();
+            CreateMap<ManufactoryHubPostDto, ManufactoryHub>().ReverseMap();
+
+            CreateMap<DepartmentManufactoryGetDto, DepartmentManufactory>().ReverseMap();
+            CreateMap<DepartmentManufactoryPostDto, DepartmentManufactory>().ReverseMap();
+
+            CreateMap<ProductPriceGetDto, ProductPrice>().ReverseMap();
+            CreateMap<ProductPricePutDto, ProductPrice>().ReverseMap();
+            CreateMap<ProductPricePostDto, ProductPrice>().ReverseMap();
+
+            CreateMap<ProductCatalogGetDto, ProductCatalog>().ReverseMap();
+            CreateMap<ProductCatalogPostDto, ProductCatalog>().ReverseMap();
+
+            CreateMap<DepartmentProductGetDto, DepartmentProduct>().ReverseMap();
+            CreateMap<DepartmentProductPostDto, DepartmentProduct>().ReverseMap();
         }
         
     }

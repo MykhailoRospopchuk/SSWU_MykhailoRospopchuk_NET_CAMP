@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.DepartmentProductDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class DepartmentProductsController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public DepartmentProductsController(ArtisianContext context)
+        public DepartmentProductsController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/DepartmentProducts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DepartmentProduct>>> GetDepartmentProducts()
+        public async Task<ActionResult<IEnumerable<DepartmentProductGetDto>>> GetDepartmentProducts()
         {
           if (_context.DepartmentProducts == null)
           {
               return NotFound();
           }
-            return await _context.DepartmentProducts.ToListAsync();
+            var departmentProduct = await _context.DepartmentProducts.ToListAsync();
+            var departmentProductResult = _mapper.Map<IEnumerable<DepartmentProductGetDto>>(departmentProduct);
+            return Ok(departmentProductResult);
         }
 
         // GET: api/DepartmentProducts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DepartmentProduct>> GetDepartmentProduct(int id)
+        public async Task<ActionResult<DepartmentProductGetDto>> GetDepartmentProduct(int id)
         {
           if (_context.DepartmentProducts == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return departmentProduct;
+            var departmentProductResult = _mapper.Map<DepartmentProductGetDto>(departmentProduct);
+            return departmentProductResult;
         }
 
         // PUT: api/DepartmentProducts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDepartmentProduct(int id, DepartmentProduct departmentProduct)
+        public async Task<ActionResult<DepartmentProductGetDto>> PutDepartmentProduct(int id, DepartmentProductGetDto departmentProductIncome)
         {
+            var departmentProduct = _mapper.Map<DepartmentProduct>(departmentProductIncome);
+
             if (id != departmentProduct.DepartmentId)
             {
                 return BadRequest();
@@ -78,18 +82,21 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var departmentProductResult = _mapper.Map<DepartmentProductGetDto>(departmentProduct);
+            return departmentProductResult;
         }
 
         // POST: api/DepartmentProducts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DepartmentProduct>> PostDepartmentProduct(DepartmentProduct departmentProduct)
+        public async Task<ActionResult<DepartmentProductGetDto>> PostDepartmentProduct(DepartmentProductPostDto departmentProductIncome)
         {
-          if (_context.DepartmentProducts == null)
-          {
-              return Problem("Entity set 'ArtisianContext.DepartmentProducts'  is null.");
-          }
+            var departmentProduct = _mapper.Map<DepartmentProduct>(departmentProductIncome);
+
+            if (_context.DepartmentProducts == null)
+            {
+                return Problem("Entity set 'ArtisianContext.DepartmentProducts'  is null.");
+            }
             _context.DepartmentProducts.Add(departmentProduct);
             try
             {
@@ -107,7 +114,8 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return CreatedAtAction("GetDepartmentProduct", new { id = departmentProduct.DepartmentId }, departmentProduct);
+            var departmentProductResult = _mapper.Map<DepartmentProductGetDto>(departmentProduct);
+            return departmentProductResult;
         }
 
         // DELETE: api/DepartmentProducts/5

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
+using AutoMapper;
+using CrudEF.ModelMapper.DepartmentManufactoryDto;
 
 namespace CrudEF.Controllers
 {
@@ -15,26 +12,30 @@ namespace CrudEF.Controllers
     public class DepartmentManufactoriesController : ControllerBase
     {
         private readonly ArtisianContext _context;
+        private readonly IMapper _mapper;
 
-        public DepartmentManufactoriesController(ArtisianContext context)
+        public DepartmentManufactoriesController(ArtisianContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/DepartmentManufactories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DepartmentManufactory>>> GetDepartmentManufactories()
+        public async Task<ActionResult<IEnumerable<DepartmentManufactoryGetDto>>> GetDepartmentManufactories()
         {
           if (_context.DepartmentManufactories == null)
           {
               return NotFound();
           }
-            return await _context.DepartmentManufactories.ToListAsync();
+            var departmentManufactory = await _context.DepartmentManufactories.ToListAsync();
+            var departmentManufactoryResult = _mapper.Map<IEnumerable<DepartmentManufactoryGetDto>>(departmentManufactory);
+            return Ok(departmentManufactoryResult);
         }
 
         // GET: api/DepartmentManufactories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DepartmentManufactory>> GetDepartmentManufactory(int id)
+        public async Task<ActionResult<DepartmentManufactoryGetDto>> GetDepartmentManufactory(int id)
         {
           if (_context.DepartmentManufactories == null)
           {
@@ -47,14 +48,17 @@ namespace CrudEF.Controllers
                 return NotFound();
             }
 
-            return departmentManufactory;
+            var departmentManufactoryResult = _mapper.Map<DepartmentManufactoryGetDto>(departmentManufactory);
+            return departmentManufactoryResult;
         }
 
         // PUT: api/DepartmentManufactories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDepartmentManufactory(int id, DepartmentManufactory departmentManufactory)
+        public async Task<ActionResult<DepartmentManufactoryGetDto>> PutDepartmentManufactory(int id, DepartmentManufactoryGetDto departmentManufactoryIncome)
         {
+            var departmentManufactory = _mapper.Map<DepartmentManufactory>(departmentManufactoryIncome);
+
             if (id != departmentManufactory.Id)
             {
                 return BadRequest();
@@ -78,22 +82,26 @@ namespace CrudEF.Controllers
                 }
             }
 
-            return NoContent();
+            var departmentManufactoryResult = _mapper.Map<DepartmentManufactoryGetDto>(departmentManufactory);
+            return departmentManufactoryResult;
         }
 
         // POST: api/DepartmentManufactories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DepartmentManufactory>> PostDepartmentManufactory(DepartmentManufactory departmentManufactory)
+        public async Task<ActionResult<DepartmentManufactoryGetDto>> PostDepartmentManufactory(DepartmentManufactoryPostDto departmentManufactoryIncome)
         {
-          if (_context.DepartmentManufactories == null)
-          {
-              return Problem("Entity set 'ArtisianContext.DepartmentManufactories'  is null.");
-          }
+            var departmentManufactory = _mapper.Map<DepartmentManufactory>(departmentManufactoryIncome);
+
+            if (_context.DepartmentManufactories == null)
+            {
+                return Problem("Entity set 'ArtisianContext.DepartmentManufactories'  is null.");
+            }
             _context.DepartmentManufactories.Add(departmentManufactory);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDepartmentManufactory", new { id = departmentManufactory.Id }, departmentManufactory);
+            var departmentManufactoryResult = _mapper.Map<DepartmentManufactoryGetDto>(departmentManufactory);
+            return departmentManufactoryResult;
         }
 
         // DELETE: api/DepartmentManufactories/5

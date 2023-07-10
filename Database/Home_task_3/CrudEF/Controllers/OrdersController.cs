@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CrudEF.DB;
 using CrudEF.Model;
@@ -33,7 +28,8 @@ namespace CrudEF.Controllers
           {
               return NotFound();
           }
-            var order = await _context.Orders.ToListAsync();
+            //var order = await _context.Orders.ToListAsync();
+            var order = await _context.Orders.Include(c => c.Customer).ThenInclude(a => a.Address).ToListAsync();
             var orderResult = _mapper.Map< IEnumerable<OrderGetDto>>(order);
             return Ok(orderResult);
         }
@@ -60,7 +56,7 @@ namespace CrudEF.Controllers
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<ActionResult<OrderGetDto>> PutOrder(int id, OrderGetDto orderIncome)
+        public async Task<ActionResult<OrderGetDto>> PutOrder(int id, OrderPutDto orderIncome)
         {
             var order = _mapper.Map<Order>(orderIncome);
 

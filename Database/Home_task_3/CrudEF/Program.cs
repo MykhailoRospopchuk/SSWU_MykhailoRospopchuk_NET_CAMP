@@ -1,7 +1,6 @@
 using CrudEF.Configuration;
 using CrudEF.DB;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace CrudEF
 {
@@ -24,6 +23,8 @@ namespace CrudEF
 
             builder.Services.AddDbContext<ArtisianContext>(options => options.UseSqlServer(connection));
 
+            builder.Services.AddCors();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -42,6 +43,12 @@ namespace CrudEF
 
             app.MapControllers();
 
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().
+                AllowAnyMethod().
+                AllowAnyHeader();
+            });
                    
 
             app.Run();

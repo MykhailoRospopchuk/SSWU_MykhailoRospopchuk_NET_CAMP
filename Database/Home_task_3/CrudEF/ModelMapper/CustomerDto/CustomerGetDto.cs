@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CrudEF.Model;
+using CrudEF.ModelMapper.AddressDto;
+using System.ComponentModel.DataAnnotations;
 
 namespace CrudEF.ModelMapper.CustomerDto
 {
@@ -6,7 +8,9 @@ namespace CrudEF.ModelMapper.CustomerDto
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; } = null!;
-        [Required(ErrorMessage = "Address Id is required")]
-        public int AddressId { get; set; }
+        //[Required(ErrorMessage = "Address Id is required")]
+        //public int AddressId { get; set; }
+
+        public virtual AddressGetDto Address { get; set; } = null!;
     }
 }

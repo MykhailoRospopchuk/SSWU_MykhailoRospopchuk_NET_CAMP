@@ -68,6 +68,7 @@ namespace CrudEF.Configuration
             CreateMap<DeliveryOrderPostDto, DeliveryOrder>().ReverseMap();
 
             CreateMap<OrderGetDto, Order>().ReverseMap();
+            CreateMap<OrderPutDto, Order>().ReverseMap();
             CreateMap<OrderPostDto, Order>().ReverseMap();
 
             CreateMap<OrderItemGetDto, OrderItem>().ReverseMap();
